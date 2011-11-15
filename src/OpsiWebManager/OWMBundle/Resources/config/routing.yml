@@ -2,5 +2,20 @@ OWMBundle_homepage:
     pattern:  /hello/{name}
     defaults: { _controller: OWMBundle:Default:index }
 Configuration:
-    pattern: /configuration
+    pattern: /configuration/
+    defaults: { _controller: OWMBundle:Configuration:index }
+Configuration_voir:
+    pattern: /configuration/voir
     defaults: { _controller: OWMBundle:Configuration:voir }
+Configuration_modifier:
+    pattern: /configuration/modifier
+    defaults: { _controller: OWMBundle:Configuration:modifier }
+Clients:
+    pattern: /clients/
+    defaults: { _controller: OWMBundle:Clients:index }
+Clients_voir:
+    pattern: /clients/voir
+    defaults: { _controller: OWMBundle:Clients:voir }
+Clients_modifier:
+    pattern: /clients/modifier
+    defaults: { _controller: OWMBundle:Clients:modifier }

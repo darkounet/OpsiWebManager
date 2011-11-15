@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>OWM : Configuration</title>
+<link type="text/css" href="{{ asset('bundles/owm/css/bootstrap.min.css') }}" rel="stylesheet"/>
+</head>
+<body>
+
+
+<table class="zebra-striped">
+<thead>
+<tr>
+<th>Parametre</th>
+<th>Valeur</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>depotDrive</td>
+<td><input id="depotDrive" class="xlarge" type="text" size="15"value="{{ depotDrive }}"> </td>
+</tr>
+
+<tr>
+<td>nextBootServiceURL</td>
+<td><input id="nextBootServiceURL" class="xlarge" type="text" size="15"value="{{ nextBootServiceURL }}" ></td>
+</tr>
+
+<tr>
+<td>utilsUrl</td>
+<td><input id="utilsUrl"  class="xlarge" type="text" size="15"value="{{ utilsUrl }}"></td>
+</tr>
+
+<tr>
+<td>configUrl</td>
+<td><input id="configUrl"  class="xlarge" type="text" size="15"value="{{ configUrl }}"> </td>
+</tr>
+
+<tr>
+<td>utilsDrive</td>
+<td><input id="utilsDrive"  class="xlarge" type="text" size="15"value="{{ utilsDrive }}"></td>
+</tr>
+
+<tr>
+<td>opsiServer</td>
+<td><input id="opsiServer" class="xlarge" type="text" size="15"value="{{ opsiServer }}"></td>
+</tr>
+
+<tr>
+<td>nextBootServerType</td>
+<td><input id="nextBootServerType" class="xlarge" type="text" size="15"value="{{ nextBootServerType }}"></td>
+</tr>
+
+<tr>
+<td>depotUrl</td>
+<td><input id="depotUrl" class="xlarge" type="text" size="15"value="{{ depotUrl }}"></td>
+</tr>
+
+<tr>
+<td>depotId</td>
+<td><input id="depotId" class="xlarge" type="text" size="15"value="{{ depotId }}"></td>
+</tr>
+
+<tr>
+<td>configDrive</td>
+<td><input id="configDrive" class="xlarge" type="text" size="15"value="{{ configDrive }}" </td>
+</tr>
+
+<tr>
+<td>winDomain</td>
+<td><input id="winDomain" class="xlarge" type="text" size="15"value="{{ winDomain }}"></td>
+</tr>
+
+</tbody>
+
+</table>
+
+<input class="btn primary" type="submit" value="Save changes">
+</body>
+</html>

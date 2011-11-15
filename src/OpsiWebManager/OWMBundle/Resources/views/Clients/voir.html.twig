@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>OWM : Configuration</title>
+<link type="text/css" href="{{ asset('bundles/owm/css/bootstrap.min.css') }}" rel="stylesheet"/>
+</head>
+<body>
+
+
+<table class="zebra-striped">
+<thead>
+<tr>
+<th>Client</th>
+<th>Ip</th>
+<th>Mac</th>
+</tr>
+</thead>
+
+<tbody>
+{% for host in clients %}
+<tr>
+<td>{{ host['hostId'] }} </td>
+<td>{{ host['ipAddress'] }}</td>
+<td>{{ host['hardwareAddress'] }}</td>
+</tr>
+{% endfor %}
+</tbody>
+
+</table>
+
+</body>
+</html>
