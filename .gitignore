@@ -1,0 +1,8 @@
+app/cache/*
+app/logs/*
+web/bundles/*
+.DS_STORE*
+*.tmp
+thumbs.db
+*.prefs
+.settings/*
