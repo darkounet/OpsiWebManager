@@ -1,3 +1,6 @@
 OWMBundle_homepage:
     pattern:  /hello/{name}
     defaults: { _controller: OWMBundle:Default:index }
+Configuration:
+    pattern: /configuration
+    defaults: { _controller: OWMBundle:Configuration:index }
