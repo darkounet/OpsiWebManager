@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>{% block title %}OWM{% endblock %}</title>
+	<link type="text/css" href="{{ asset('bundles/owm/css/bootstrap.min.css') }}" rel="stylesheet"/>
+    </head>
+    <body>
+    <div class="topbar">
+      <div class="topbar-inner">
+        <div class="container-fluid">
+          <a class="brand" href="#">Opsi Web Manager</a>
+
+          <ul class="nav">
+            <li class="active"><a href="#">Accueil</a></li>
+            <li><a href="#about">Paquets</a></li>
+            <li><a href="{{ path('Clients_voir') }}">Clients</a></li>
+            <li><a href="#contact">Extinction</a></li>
+            <li><a href="#contact">Backup</a></li>
+            <li><a href="#contact">Drivers</a></li>
+            <li><a href="{{ path('Configuration_voir') }}">Configuration</a></li>
+          </ul>
+
+        </div>
+      </div>
+    </div>
+<img src="{{ asset('bundles/owm/images/hd.png') }}">
+<div class="container-fluid">
+<div class="sidebar">
+<div class="well">
+<p>Menu</p>
+</div>
+</div>
+<div class="content">
+<div class="hero-unit">
+        {% block body %}
+        {% endblock %}
+</div>
+</div>
+</div>
+    </body>
+</html>
