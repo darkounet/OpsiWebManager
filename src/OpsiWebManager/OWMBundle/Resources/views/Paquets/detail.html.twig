@@ -1,0 +1,33 @@
+{% extends "OWMBundle::layout.html.twig" %}
+{% block body %}
+<h1>
+{{ paquets.productId }} 
+<small>{{ paquets.packageVersion }} -  {{ paquets.productVersion }}</small>
+</h1>
+
+<table class="zebra-striped">
+<thead>
+<tr>
+<th>Id</th>
+<th>Type</th>
+<th>Version paquet</th>
+<th>Version logiciel</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>{{ paquets.productId }}</td>
+<td>{{ paquets.productType }}</td>
+<td>{{ paquets.packageVersion }}</td>
+<td>{{ paquets.productVersion }}</td>
+</tr>
+</tbody>
+
+</table>
+<a class="btn danger" data-content="And here's some amazing content. It's very engaging. right?" rel="popover" href="#" data-original-title="A title">hover for popover</a>
+<script>
+$(function () {
+$("a[rel=popover]").popover({ offset: 10}).click(function(e) {e.preventDefault()})
+})
+</script>
+{% endblock %}

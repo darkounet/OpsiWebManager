@@ -1,0 +1,10 @@
+{% extends "OWMBundle::layout.html.twig" %}
+{% block body %}
+
+<form action="{{ path('Clients_creer') }}" method="post" {{ form_enctype(form) }}>
+    {{ form_widget(form) }}
+
+    <input type="submit" />
+</form>
+
+{% endblock %}

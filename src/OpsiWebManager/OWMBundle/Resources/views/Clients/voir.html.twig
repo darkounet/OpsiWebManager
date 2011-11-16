@@ -1,5 +1,10 @@
 {% extends "OWMBundle::layout.html.twig" %}
 {% block body %}
+
+ <script type="text/javascript">
+   var test = JSON.parse({{ clients }});
+   console.log(test);
+</script>
 <table class="zebra-striped">
 <thead>
 <tr>

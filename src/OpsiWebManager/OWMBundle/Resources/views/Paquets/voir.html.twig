@@ -1,0 +1,22 @@
+{% extends "OWMBundle::layout.html.twig" %}
+{% block body %}
+<script type="text/javascript">
+   var test = {{ paquets }};
+   console.log(test);
+</script>
+<table class="zebra-striped">
+<thead>
+<tr>
+<th>ProductId</th>
+</tr>
+</thead>
+<tbody>
+{% for pkg in paquets %}
+<tr>
+<td><a href="{{ path('Paquets_details', { 'pkg' : pkg}) }}"> {{ pkg }}</a></td>
+</tr>
+{% endfor %}
+</tbody>
+
+</table>
+{% endblock %}

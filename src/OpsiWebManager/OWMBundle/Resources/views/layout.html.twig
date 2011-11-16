@@ -4,6 +4,14 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title>{% block title %}OWM{% endblock %}</title>
 	<link type="text/css" href="{{ asset('bundles/owm/css/bootstrap.min.css') }}" rel="stylesheet"/>
+	<script type="text/JavaScript" src="{{ asset('bundles/owm/js/bootstrap-alert.js') }}"></script> 
+	<script type="text/JavaScript" src="{{ asset('bundles/owm/js/bootstrap-button.js') }}"></script> 
+	<script type="text/JavaScript" src="{{ asset('bundles/owm/js/bootstrap-dropdown.js') }}"></script> 
+	<script type="text/JavaScript" src="{{ asset('bundles/owm/js/bootstrap-modal.js') }}"></script> 
+	<script type="text/JavaScript" src="{{ asset('bundles/owm/public/js/bootstrap-popover.js') }}"></script> 
+	<script type="text/JavaScript" src="{{ asset('bundles/owm/js/bootstrap-scrollspy.js') }}"></script> 
+	<script type="text/JavaScript" src="{{ asset('bundles/owm/js/bootstrap-tabs.js') }}"></script> 
+	<script type="text/JavaScript" src="{{ asset('bundles/owm/js/bootstrap-twipsy.js') }}"></script> 
     </head>
     <body>
     <div class="topbar">
@@ -13,7 +21,7 @@
 
           <ul class="nav">
             <li class="active"><a href="#">Accueil</a></li>
-            <li><a href="#about">Paquets</a></li>
+            <li><a href="{{ path('Paquets_voir') }}">Paquets</a></li>
             <li><a href="{{ path('Clients_voir') }}">Clients</a></li>
             <li><a href="#contact">Extinction</a></li>
             <li><a href="#contact">Backup</a></li>
