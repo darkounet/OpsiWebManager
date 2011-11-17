@@ -31,7 +31,6 @@ class ClientsController extends Controller
 		return $this->render('OWMBundle:Clients:modifier.html.twig',array('clients' => $clients)); 
 
 	}
-
 	public function creerAction(Request $request)
 	{
 		$domain=shell_exec("sudo /usr/bin/opsi-admin -Sd method getDomain");
@@ -48,13 +47,11 @@ class ClientsController extends Controller
 
 		if ($request->getMethod() == 'POST') {
 			$form->bindRequest($request);
-			// data is an array with "name", "email", and "message" keys
 			$data = $form->getData();
 
 			shell_exec("sudo /usr/bin/opsi-admin -d method createClient ".$data['ClientName']." ".$data['Domain']." ".$data['Description']." ".$data['Notes']." ".$data['IPaddress']." ".$data['MACaddress']);
 			if ($form->isValid()) {
-				// perform some action, such as saving the task to the database
-
+				 $this->get('session')->setFlash('notice', $data['ClientName']." créer avec succès !!");
 				return $this->redirect($this->generateUrl('Clients_voir'));
 			}
 

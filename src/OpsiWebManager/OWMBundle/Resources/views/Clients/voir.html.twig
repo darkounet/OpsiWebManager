@@ -1,10 +1,11 @@
 {% extends "OWMBundle::layout.html.twig" %}
 {% block body %}
-
- <script type="text/javascript">
-   var test = JSON.parse({{ clients }});
-   console.log(test);
-</script>
+{% if app.session.hasFlash('notice') %}
+<div class="alert-message success">
+<a id="close_alert" class="close" href="#">×</a>
+<p>{{ app.session.flash('notice') }}</p>
+</div>
+{% endif %}
 <table class="zebra-striped">
 <thead>
 <tr>
@@ -17,12 +18,25 @@
 <tbody>
 {% for host in clients %}
 <tr>
-<td>{{ host['hostId'] }} </td>
+<td id='hostid'>{{ host['hostId'] }} </td>
 <td>{{ host['ipAddress'] }}</td>
 <td>{{ host['hardwareAddress'] }}</td>
+<td>
+<a id='detail' class="btn danger" data-content="{{ host['ipAddress'] }}" rel="popover" href="#" data-original-title="{{ host['hostId'] }}">detail</a></td>
+
 </tr>
 {% endfor %}
+
 </tbody>
 
 </table>
+
+<script type="text/javascript">
+$(function () {
+
+$('#detail').click(function() {
+	alert('toto');
+});
+})
+</script>
 {% endblock %}

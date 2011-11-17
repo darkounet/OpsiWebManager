@@ -1,9 +1,16 @@
 {% extends "OWMBundle::layout.html.twig" %}
 {% block body %}
 
-<form action="{{ path('Clients_creer') }}" method="post" {{ form_enctype(form) }}>
-    {{ form_widget(form) }}
 
+<form action="{{ path('Clients_creer') }}" method="post" {{ form_enctype(form) }}>
+{{ form_errors(form) }}
+{{ form_row(form.ClientName) }}
+{{ form_row(form.Domain) }}
+{{ form_row(form.Description) }}
+{{ form_row(form.IPaddress) }}
+{{ form_row(form.MACaddress) }}
+
+{{ form_rest(form) }}
     <input type="submit" />
 </form>
 
