@@ -1,0 +1,30 @@
+{% extends "OWMBundle::layout.html.twig" %}
+{% block body %}
+<script type="text/javascript">
+var test = {{ backup }};
+console.log(test);
+</script>
+<table class="zebra-striped">
+<thead>
+<tr>
+<th>Parametre</th>
+<th>Valeur</th>
+<th>Action</th>
+</tr>
+</thead>
+
+<tbody>
+{% for u in backup %}
+<tr>
+<td>{{ u }} </td>
+</tr>
+{% else %}
+<tr>
+<td>Aucun backup ... :(</td>
+</tr>
+{% endfor %}
+</tbody>
+
+</table>
+{% endblock %}
+

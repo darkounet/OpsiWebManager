@@ -12,7 +12,9 @@ class PaquetsController extends Controller
 {
 	public function indexAction()
 	{
-		return $this->render('OWMBundle:Paquets:index.html.twig');
+		$nbnet=shell_exec("sudo /usr/bin/opsi-admin -Sd method getNetBootProductIds_list | wc -l");
+		$nblocal=shell_exec("sudo /usr/bin/opsi-admin -Sd method getLocalBootProductIds_list | wc -l");
+		return $this->render('OWMBundle:Paquets:index.html.twig', array('NB_Local' => $nblocal, 'NB_Net' => $nbnet));
 	} 
 	public function voirAction()
 	{

@@ -61,7 +61,6 @@ class ConfigurationController extends Controller
 			$form->bindRequest($request);
 
 			if ($form->isValid()) {
-				//fais ton traitement
 			}
 		}
 

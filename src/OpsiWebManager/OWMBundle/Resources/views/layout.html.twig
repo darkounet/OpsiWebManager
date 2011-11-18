@@ -4,52 +4,61 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>{% block title %}OWM{% endblock %}</title>
 {% block stylesheets %}
-<link type="text/css" href="{{ asset('bundles/owm/css/bootstrap.min.css') }}" rel="stylesheet"/>
+<link type="text/css" href="{{ asset('bundles/owm/css/bootstrap.css') }}" rel="stylesheet"/>
+{% endblock %}
+{% block javascripts %}
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.min.js"></script>
+<script type="text/javascript" src="{{ asset('bundles/owm/js/bootstrap-modal.js') }}"></script> 
+<script type="text/javascript" src="{{ asset('bundles/owm/js/bootstrap-alert.js') }}"></script> 
+<script type="text/javascript" src="{{ asset('bundles/owm/js/bootstrap-twipsy.js') }}"></script> 
+<script type="text/javascript" src="{{ asset('bundles/owm/js/bootstrap-popover.js') }}"></script> 
+<script type="text/javascript" src="{{ asset('bundles/owm/js/bootstrap-dropdown.js') }}"></script> 
+<script type="text/javascript" src="{{ asset('bundles/owm/js/bootstrap-scrollspy.js') }}"></script> 
+<script type="text/javascript" src="{{ asset('bundles/owm/js/bootstrap-tabs.js') }}"></script> 
+<script type="text/javascript" src="{{ asset('bundles/owm/js/bootstrap-button.js') }}"></script> 
 {% endblock %}
 </head>
 <body>
-<div class="topbar">
-<div class="topbar-inner">
-<div class="container-fluid">
-<a class="brand" href="#">Opsi Web Manager</a>
+<div data-dropdown="dropdown" class="topbar" id="topbar-example">
+              <div class="topbar-inner">
+                <div class="container">
+                  <h3><a href="#">Project Name</a></h3>
+                  <ul>
+                    <li class="menu">
+                      <a class="menu" href="#">
+<img src="{{ asset('bundles/owm/images/icons/box.png') }}" >Paquets</a>
+                      <ul class="menu-dropdown">
 
-<ul class="nav">
-<li class="active"><a href="#">Accueil</a></li>
-<li><a href="{{ path('Paquets_voir') }}">Paquets</a></li>
-<li><a href="{{ path('Clients_voir') }}">Clients</a></li>
-<li><a href="#contact">Extinction</a></li>
-<li><a href="#contact">Backup</a></li>
-<li><a href="#contact">Drivers</a></li>
-<li><a href="{{ path('Configuration_voir') }}">Configuration</a></li>
-</ul>
+                        <li><a href="{{ path('Paquets') }}">Accueil</a></li>
+                        <li class="divider"></li>
+                        <li><a href="{{ path('Paquets_voir') }}">Lister</a></li>
+                        <li class="divider"></li>
+                        <li><a href="{{ path('Paquets_creer') }}">Créer</a></li>
+                        <li><a href="{{ path('Paquets_compiler') }}">Compiler</a></li>
+                        <li><a href="{{ path('Paquets_installer') }}">Installer</a></li>
+                        <li class="divider"></li>
+                        <li><a href="{{ path('Paquets_desinstaller') }}">Désinstaller</a></li>
+                      </ul>
+                    </li>
+			</ul>
+			<ul>
+			<li class="menu">
 
-</div>
-</div>
-</div>
+		                      <a class="menu" href="#">Clients</a>
+                      <ul class="menu-dropdown">
+                        <li><a href="#">Lister</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#">Créer</a></li>
+                        <li><a href="#">Compiler</a></li>
+                      </ul>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
 <img src="{{ asset('bundles/owm/images/hd.png') }}">
-<div class="container-fluid">
-<div class="sidebar">
-<div class="well">
-<p>Menu</p>
-</div>
-</div>
-<div class="content">
-<div class="hero-unit">
 {% block body %}
 {% endblock %}
-</div>
-</div>
-</div>
 
-{% block javascripts %}
-<script type="text/JavaScript" src="{{ asset('bundles/owm/js/bootstrap-alert.js') }}"></script> 
-<script type="text/JavaScript" src="{{ asset('bundles/owm/js/bootstrap-button.js') }}"></script> 
-<script type="text/JavaScript" src="{{ asset('bundles/owm/js/bootstrap-dropdown.js') }}"></script> 
-<script type="text/JavaScript" src="{{ asset('bundles/owm/js/bootstrap-modal.js') }}"></script> 
-<script type="text/JavaScript" src="{{ asset('bundles/owm/js/bootstrap-popover.js') }}"></script> 
-<script type="text/JavaScript" src="{{ asset('bundles/owm/js/bootstrap-scrollspy.js') }}"></script> 
-<script type="text/JavaScript" src="{{ asset('bundles/owm/js/bootstrap-tabs.js') }}"></script> 
-<script type="text/JavaScript" src="{{ asset('bundles/owm/js/bootstrap-twipsy.js') }}"></script> 
-{% endblock %}
 </body>
 </html>

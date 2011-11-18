@@ -31,3 +31,19 @@ Paquets_modifier:
 Paquets_details:
     pattern: /paquets/detail/{pkg}/
     defaults: { _controller: OWMBundle:Paquets:detail }
+Paquets_creer:
+    pattern: /paquets/creer/
+    defaults: { _controller: OWMBundle:Paquets:creer }
+Paquets_compiler:
+    pattern: /paquets/compiler/
+    defaults: { _controller: OWMBundle:Paquets:compiler }
+Paquets_installer:
+    pattern: /paquets/installer/
+    defaults: { _controller: OWMBundle:Paquets:installer }
+Paquets_desinstaller:
+    pattern: /paquets/desinstaller/
+    defaults: { _controller: OWMBundle:Paquets:desinstaller }
+Backup: 
+    pattern: /backups/
+    defaults: { _controller: OWMBundle:Backups:index }
+

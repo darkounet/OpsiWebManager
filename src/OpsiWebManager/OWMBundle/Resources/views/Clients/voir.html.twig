@@ -1,42 +1,50 @@
 {% extends "OWMBundle::layout.html.twig" %}
 {% block body %}
+
 {% if app.session.hasFlash('notice') %}
 <div class="alert-message success">
-<a id="close_alert" class="close" href="#">×</a>
-<p>{{ app.session.flash('notice') }}</p>
+	<a id="close_alert" class="close" href="#">×</a>
+	<p>{{ app.session.flash('notice') }}</p>
 </div>
 {% endif %}
+
 <table class="zebra-striped">
-<thead>
-<tr>
-<th>Client</th>
-<th>Ip</th>
-<th>Mac</th>
-</tr>
-</thead>
+	<thead>
+		<tr>
+			<th>Client</th>
+			<th>Ip</th>
+			<th>Mac</th>
+		</tr>
+	</thead>
 
-<tbody>
-{% for host in clients %}
-<tr>
-<td id='hostid'>{{ host['hostId'] }} </td>
-<td>{{ host['ipAddress'] }}</td>
-<td>{{ host['hardwareAddress'] }}</td>
-<td>
-<a id='detail' class="btn danger" data-content="{{ host['ipAddress'] }}" rel="popover" href="#" data-original-title="{{ host['hostId'] }}">detail</a></td>
+	<tbody>
 
-</tr>
-{% endfor %}
+	{% for host in clients %}
+		<tr>
+			<td id='hostid'>{{ host['hostId'] }} </td>
+			<td>{{ host['ipAddress'] }}</td>
+			<td>{{ host['hardwareAddress'] }}</td>
+			
+		</tr>
+	{% endfor %}
 
-</tbody>
+	</tbody>
 
 </table>
 
-<script type="text/javascript">
+<a class="btn danger" data-content="And here's some amazing content. It's very engaging. right?" rel="popover" href="#" data-original-title="A title">hover for popover</a>
+<script>
 $(function () {
-
-$('#detail').click(function() {
-	alert('toto');
-});
+$("a[rel=popover]")
+.popover({
+offset: 10
+})
+.click(function(e) {
+e.preventDefault()
+})
 })
 </script>
+
+
+
 {% endblock %}
