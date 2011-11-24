@@ -34,7 +34,6 @@
         
       </div>
 
-      <!-- Example row of columns -->
       <div class="row">
         <div class="span4">
           <h2>Création</h2>
@@ -42,14 +41,12 @@
     <p><strong>Info : </strong>La création vous permet de commencer un nouveau paquet vide.</p> 
     <p>C'est ici que tout commence !</p>
     </div><p>
-          <p><center><a href="{{ path('Paquets_creer') }}" class="btn success large">Créer »</a></center></p>
         </div>
         <div class="span4">
           <h2>Compilation</h2>
            <p><div class="alert-message warning">
     <p><strong>Info : </strong>La compilation vous permet de generer votre paquet</p>
     </div></p>
-          <p><a href="{{ path('Paquets_compiler') }}" class="btn success large">Compiler »</a></p>
        </div>
         <div class="span4">
           <h2>Installation</h2>
@@ -57,30 +54,15 @@
     <p><strong>Info : </strong>L'installation va installer votre paquet dans votre dépôt</p>
     <p>Vous pourrez l'installer sur vos clients</p>
     </div></p>
-          <p><a href="{{ path('Paquets_installer') }}" class="btn success large">Installer »</a></p>
         </div>
         <div class="span4">
           <h2>Désinstallation</h2>
           <p><div class="alert-message warning">
     <p><strong>Info : </strong>La désinstallation va supprimer un paquet de votre dépôt</p>
     </div></p>
-          <p><a href="{{ path('Paquets_desinstaller') }}" class="btn danger large">Désinstaller »</a></p>
         </div>
       </div>
 
     </div>
-
-<a class="btn danger" data-content="And here's some amazing content. It's very engaging. right?" rel="popover" href="#" data-original-title="A title">hover for popover</a>
-<script>
-$(function () {
-$("a[rel=popover]")
-.popover({
-offset: 10
-})
-.click(function(e) {
-e.preventDefault()
-})
-})
-</script>
 {% endblock %}
 

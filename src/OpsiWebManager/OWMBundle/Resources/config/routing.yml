@@ -1,3 +1,6 @@
+homepage:
+    pattern: /
+    defaults: { _controller: OWMBundle:Paquets:index }
 Configuration:
     pattern: /configuration/
     defaults: { _controller: OWMBundle:Configuration:index }
@@ -19,6 +22,9 @@ Clients_modifier:
 Clients_creer:
     pattern: /clients/creer/
     defaults: { _controller: OWMBundle:Clients:creer }
+Clients_supprimer:
+    pattern: /clients/supprimer/
+    defaults: { _controller: OWMBundle:Clients:supprimer }
 Paquets:
     pattern: /paquets/
     defaults: { _controller: OWMBundle:Paquets:index }

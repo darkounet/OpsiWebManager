@@ -22,9 +22,11 @@
 <div data-dropdown="dropdown" class="topbar" id="topbar-example">
               <div class="topbar-inner">
                 <div class="container">
-                  <h3><a href="#">Project Name</a></h3>
+                  <h3><a href="#">OpsiWebManager</a></h3>
                   <ul>
                     <li class="menu">
+
+<!--- PAQUETS --!>
                       <a class="menu" href="#">
 <img src="{{ asset('bundles/owm/images/icons/box.png') }}" >Paquets</a>
                       <ul class="menu-dropdown">
@@ -41,15 +43,43 @@
                       </ul>
                     </li>
 			</ul>
+<!--- CLIENTS --!>
 			<ul>
 			<li class="menu">
 
-		                      <a class="menu" href="#">Clients</a>
+                      <a class="menu" href="#">Clients</a>
                       <ul class="menu-dropdown">
-                        <li><a href="#">Lister</a></li>
+                        <li><a href="{{ path('Clients_voir') }}">Lister</a></li>
                         <li class="divider"></li>
-                        <li><a href="#">Créer</a></li>
-                        <li><a href="#">Compiler</a></li>
+                        <li><a href="{{ path('Clients_creer') }}">Créer</a></li>
+			<li><a href="{{ path('Clients_supprimer') }}">Supprimer</a></li>
+                      </ul>
+                    </li>
+                  </ul>
+
+<!--- BACKUPS --!>
+                        <ul>
+                        <li class="menu">
+
+                      <a class="menu" href="#">Backups</a>
+                      <ul class="menu-dropdown">
+                        <li><a href="{{ path('Backup') }}">Lister</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#">Detail</a></li>
+                        <li><a href="#">Supprimer</a></li>
+                      </ul>
+                    </li>
+                  </ul>
+
+<!--- CONFIGURATION --!>
+                        <ul>
+                        <li class="menu">
+
+                                      <a class="menu" href="#">Configuration</a>
+                      <ul class="menu-dropdown">
+                        <li><a href="{{ path('Configuration_voir') }}">Voir</a></li>
+                        <li class="divider"></li>
+                        <li><a href="{{ path('Configuration_modifier') }}">Modifier</a></li>
                       </ul>
                     </li>
                   </ul>

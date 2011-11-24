@@ -12,7 +12,6 @@ class BackupsController extends Controller
 	{
 		$backup = array();
 		exec("/bin/ls -lh /var/lib/opsi/ntfs-images/*.*",$backup,$ret);
-		
 		return $this->render('OWMBundle:Backup:index.html.twig', array('backup' => $backup,'ret' => $ret));
 	}
 	public function supprimerAction($bk)
