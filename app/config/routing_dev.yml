@@ -1,6 +1,6 @@
 _welcome:
     pattern:  /
-    defaults: { _controller: AcmeDemoBundle:Welcome:index }
+    defaults: { _controller: OWMBundle:Welcome:index }
 
 _assetic:
     resource: .

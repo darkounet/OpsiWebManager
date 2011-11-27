@@ -44,10 +44,10 @@ class ClientsController extends Controller
 		$form = $this->createFormBuilder($defaultData)
 			->add('ClientName', 'text')
 			->add('Domain', 'text')
-			->add('Description', 'textarea',array('required' => false))
-			->add('Notes', 'textarea',array('required' => false))
-			->add('IPaddress', 'text',array('required' => false))
-			->add('MACaddress', 'text',array('required' => false))
+			->add('Description', 'text',array('required',false))
+			->add('Notes', 'text',array('required',false))
+			->add('IPaddress', 'text',array('required',false))
+			->add('MACaddress', 'text',array('required',false))
 			->getForm();
 
 

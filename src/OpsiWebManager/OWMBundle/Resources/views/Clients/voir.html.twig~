@@ -12,7 +12,7 @@ $("table#clients").tablesorter({ sortList: [[1,0]] });
 </div>
 <script>
 setTimeout(function() {
-$('#alert').hide(1000);
+$('#alert').hide(2000);
 }, 5000);
 </script>
 {% endif %}

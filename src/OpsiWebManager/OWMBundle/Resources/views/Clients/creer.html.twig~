@@ -29,9 +29,9 @@
 <td>{{ form_widget(form.MACaddress) }}</td>
 </tr>
 </tbody>
-{{ form_rest(form) }}
+
 </table>
     <input type="submit" />
 </form>
-
+{{ form_rest(form) }}
 {% endblock %}

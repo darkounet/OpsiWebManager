@@ -38,7 +38,7 @@ class ConfigurationController extends Controller
 	public function modifierAction()
 	{
 
-		$conf=shell_exec("sudo opsi-admin -rd method getNetworkConfig_hash");
+		$conf=shell_exec("sudo opsi-admin -d method getNetworkConfig_hash");
 		$yaml = new Parser();
 		$conf  = $yaml->parse($conf);
 		return $this->render('OWMBundle:Configuration:modifier.html.twig', 

@@ -1,0 +1,19 @@
+{% extends "OWMBundle::layout.html.twig" %}
+{% block body %}
+
+<div class="hero-unit" align="center">
+<h1>{{ client['hostId'] }}</h1>
+<h2>{{ client['ipAddress'] }}</h2>
+<h3>{{ client['hardwareAddress'] }}</h3>
+
+{{ client['description'] }}
+{{ client['created'] }}
+{{ client['inventoryNumber'] }}
+{{ client['notes'] }}
+
+{{ client['lastSeen'] }}
+{{ client['oneTimePassword'] }}
+{{ client['opsiHostKey'] }}
+
+</div>
+{% endblock %}

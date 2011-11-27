@@ -1,0 +1,33 @@
+<?php
+
+namespace OpsiWebManager\OWMBundle\Controller;
+
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+
+use Symfony\Component\HttpFoundation\Response;
+
+use Symfony\Component\Yaml\Parser;
+
+class PaquetsController extends Controller
+{
+	public function indexAction()
+	{
+		$nbnet=shell_exec("sudo /usr/bin/opsi-admin -Sd method getNetBootProductIds_list | wc -l");
+		$nblocal=shell_exec("sudo /usr/bin/opsi-admin -Sd method getLocalBootProductIds_list | wc -l");
+		return $this->render('OWMBundle:Paquets:index.html.twig', array('NB_Local' => $nblocal, 'NB_Net' => $nbnet));
+	} 
+	public function voirAction()
+	{
+#getProductIds_list
+		$paquets=shell_exec("sudo /usr/bin/opsi-admin -Sd method productOnDepot_getHashes");
+		$yaml = new Parser();
+		$paquets = $yaml->parse($paquets);
+		return $this->render('OWMBundle:Paquets:voir.html.twig',array('paquets' => $paquets)); 
+	}
+	public function detailAction($pkg){
+		$paquets=shell_exec("sudo /usr/bin/opsi-admin -rd method getProduct_hash '".$pkg."'");
+		$yaml = new Parser();
+		$paquets = $yaml->parse($paquets);
+		return $this->render('OWMBundle:Paquets:detail.html.twig',array('paquets' => $paquets));
+	}
+}

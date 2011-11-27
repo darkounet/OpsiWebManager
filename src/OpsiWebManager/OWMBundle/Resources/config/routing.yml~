@@ -26,7 +26,7 @@ Clients_creer:
     pattern: /clients/creer/
     defaults: { _controller: OWMBundle:Clients:creer }
 Clients_supprimer:
-    pattern: /clients/supprimer/{client}/
+    pattern: /clients/supprimer/
     defaults: { _controller: OWMBundle:Clients:supprimer }
 Paquets:
     pattern: /paquets/
