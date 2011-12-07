@@ -8,6 +8,7 @@
 {% endblock %}
 {% block javascripts %}
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.min.js"></script>
+<script type="text/javascript" src="{{ asset('bundles/owm/js/moment.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('bundles/owm/js/jquery.tablesorter.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('bundles/owm/js/bootstrap-modal.js') }}"></script> 
 <script type="text/javascript" src="{{ asset('bundles/owm/js/bootstrap-alert.js') }}"></script> 
@@ -23,13 +24,13 @@
 <div data-dropdown="dropdown" class="topbar" id="topbar-example">
               <div class="topbar-inner">
                 <div class="container">
-                  <h3><a href="{{ path('homepage')}}">OpsiWebManager</a></h3>
+                  <h3><a href="{{ path('homepage') }}">OpsiWebManager</a></h3>
                   <ul>
                     <li class="menu">
 
 <!--- PAQUETS --!>
                       <a class="menu" href="#">
-<img src="{{ asset('bundles/owm/images/icons/box.png') }}" >Paquets</a>
+			<img src="{{ asset('bundles/owm/images/icons/box.png') }}" >Paquets</a>
                       <ul class="menu-dropdown">
 
                         <li><a href="{{ path('Paquets') }}">Accueil</a></li>

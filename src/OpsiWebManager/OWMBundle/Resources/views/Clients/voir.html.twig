@@ -2,7 +2,18 @@
 {% block body %}
 <script >
 $(function() {
-$("table#clients").tablesorter({ sortList: [[1,0]] });
+//Cache le span pour le nombre de clients
+$('#nb_client').hide();
+$('#action-div').hide();
+
+$("table#clients").tablesorter({ 
+	headers: {
+			0: { 
+				sorter: false 
+			}
+		},
+	sortList: [[1,0]]
+	});
 });
 </script>
 {% if app.session.hasFlash('notice') %}
@@ -16,10 +27,34 @@ $('#alert').hide(1000);
 }, 5000);
 </script>
 {% endif %}
+<form id="action_clients" method="POST" action="{{ path('Clients_process') }}">
+<hr>
+<div id="action-div">
+<p align="center">
+	<span id="nb_client" class="label warning"></span>
+</p>
+<p align="center">
 
+
+
+Action : <br><br>
+<select id="mediumSelect" name="client_action" class="small">
+		<option> </option>
+                <option value="Eteindre">Eteindre</option>
+                <option value="Reveiller">Réveiller</option>
+                <option value="Supprimer">Supprimer</option>
+                <option value="Message">Envoyer Message</option>
+              </select>
+<br>
+<br>
+<button class="btn" type="submit">Executer</button>
+</p>
+<hr>
+</div>
 <table id="clients" class="zebra-striped">
 	<thead>
 		<tr>
+			<th><input id="check_all" type="checkbox"></th>
 			<th class="blue header">Client</th>
 			<th class="green header">Ip</th>
 			<th class="red header">Mac</th>
@@ -31,19 +66,70 @@ $('#alert').hide(1000);
 	<tbody>
 
 	{% for host in clients %}
-<a href="{{ path('Clients_detail', { 'client' : host['hostId']}) }}">
-		<tr onclick=document.location.href="{{ path('Clients_detail', { 'client' : host['hostId']}) }}">
+
+<tr>
+			<td><input type="checkbox" value="{{ host['hostId'] }}" name="clients[]"></td>
 			<td id='hostid'>{{ host['hostId'] }} </td>
 			<td>{{ host['ipAddress'] }}</td>
 			<td>{{ host['hardwareAddress'] }}</td>
 			<td>Online</td>
-			<td><a href="{{ path('Clients_supprimer', { 'client' : host['hostId']}) }}">Supprimer</a></td>
+			<td><a href="{{ path('Clients_detail', { 'client' : host['hostId']}) }}"><button class="btn">Editer</button></a>
+<a class="btn danger" 
+data-content="Etes vous sûre ?
+
+<hr>
+<a href='{{ path('Clients_supprimer', { 'client' : host['hostId']}) }}'><button name='confirm_yes' align='center' class='btn success'>Oui</button></a>
+<button name='confirm_no' align='center' class='btn danger''>Non</button>
+
+" rel="popover" href="#" data-original-title="Confirmation">Supprimer</a>
+			</td>
 			
 		</tr>
-</a>
+
 	{% endfor %}
 
 	</tbody>
 
 </table>
+</form>
+<script>
+            $(function () {
+
+//Affiche le popover pour la suppréssion des clients
+$("a[rel=popover]").popover({offset: 10,trigger: focus,html: true})
+
+//Affiche le nombre de clients séléctionnés
+$('#clients').find(':checkbox').click(function() {
+$("#check_all").click(function() { 
+	var cases = $('#clients').find(':checkbox');
+	if(this.checked){			
+		cases.attr('checked', true);
+
+		$('#nb_client').html((($(":checkbox:checked").length)-1) + " clients");
+                $('#action-div').show('fast');
+		$('#nb_client').show('fast');
+        }else{
+		cases.attr('checked', false);
+		$('#nb_client').hide('fast');
+                $('#action-div').hide('fast');
+        };
+});
+	if(this.checked){
+		$('#nb_client').html((($(":checkbox:checked").length)) + " clients");
+                $('#action-div').show('fast');
+		$('#nb_client').show('fast');
+	}else{
+		if ($(":checkbox:checked").length > 0){
+		$('#nb_client').html((($(":checkbox:checked").length)) + " clients");
+                $('#action-div').show('fast');
+		$('#nb_client').show('fast');
+                
+		}else{
+		$('#nb_client').hide('fast');
+                $('#action-div').hide('fast');
+		};
+	};
+});
+});
+          </script>
 {% endblock %}

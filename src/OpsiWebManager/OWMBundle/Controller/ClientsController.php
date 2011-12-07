@@ -27,7 +27,24 @@ class ClientsController extends Controller
 		$client=shell_exec("sudo opsi-admin -rd method getHost_hash ".$client);
 		$yaml = new Parser();
 		$client = $yaml->parse($client);
-		return $this->render('OWMBundle:Clients:detail.html.twig',array('client' => $client)); 		
+		$created = array(
+			"annee" => substr($client['created'], 0, -10),
+			"mois"	=> substr($client['created'], 4, -8),
+			"jours" => substr($client['created'], 6, -6),
+			"heures" => substr($client['created'], 8, -4),
+			"minutes" => substr($client['created'], 10, -2),
+			"secondes" => substr($client['created'],12)
+		);
+		$lastSeen = array(
+			"annee" => substr($client['lastSeen'], 0, -10),
+			"mois"	=> substr($client['lastSeen'], 4, -8),
+			"jours" => substr($client['lastSeen'], 6, -6),
+			"heures" => substr($client['lastSeen'], 8, -4),
+			"minutes" => substr($client['lastSeen'], 10, -2),
+			"secondes" => substr($client['lastSeen'],12)
+		);
+
+		return $this->render('OWMBundle:Clients:detail.html.twig',array('client' => $client, 'created' => $created, 'lastSeen' => $lastSeen)); 		
 	}
 	public function supprimerAction($client)
 	{
@@ -37,13 +54,32 @@ class ClientsController extends Controller
 		
 
 	}
+	public function processAction()
+	{
+$action = $this->getRequest()->get('client_action');
+
+if ($action == 'Supprimer')
+{
+
+
+$clients = $this->getRequest()->get('clients');
+$i=0;
+foreach ($clients as $client)
+{
+	shell_exec("sudo /usr/bin/opsi-admin -d method host_delete ".$client);
+$i++;
+}
+$this->get('session')->setFlash('notice',$i." clients supprimer avec succès !!");
+	return $this->redirect($this->generateUrl('Clients_voir'));
+}
+return $this->redirect($this->generateUrl('Clients_voir'));
+	}
 	public function creerAction(Request $request)
 	{
 		$domain=shell_exec("sudo /usr/bin/opsi-admin -Sd method getDomain");
 		$defaultData = array('Domain' => $domain);
 		$form = $this->createFormBuilder($defaultData)
 			->add('ClientName', 'text')
-			->add('Domain', 'text')
 			->add('Description', 'textarea',array('required' => false))
 			->add('Notes', 'textarea',array('required' => false))
 			->add('IPaddress', 'text',array('required' => false))

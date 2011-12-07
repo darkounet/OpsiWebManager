@@ -23,7 +23,7 @@
 <div data-dropdown="dropdown" class="topbar" id="topbar-example">
               <div class="topbar-inner">
                 <div class="container">
-                  <h3><a href="{{ path('homepage'}}">OpsiWebManager</a></h3>
+                  <h3><a href="{{ path('homepage')}}">OpsiWebManager</a></h3>
                   <ul>
                     <li class="menu">
 

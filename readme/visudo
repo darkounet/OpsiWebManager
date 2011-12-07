@@ -1,0 +1,4 @@
+User_Alias WWW=www-data
+Cmnd_Alias OWM = /usr/bin/opsi-admin
+WWW ALL=NOPASSWD: OWM
+
