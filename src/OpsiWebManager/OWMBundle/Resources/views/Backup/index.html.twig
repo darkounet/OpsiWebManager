@@ -1,19 +1,32 @@
 {% extends "OWMBundle::layout.html.twig" %}
 {% block body %}
-<table class="zebra-striped">
+<script>
+$(function() {
+$("table#backups").tablesorter({ sortList: [[1,0]] });
+});
+</script>
+<table id="backups" class="zebra-striped">
 <thead>
 <tr>
-<th>Parametre</th>
-<th>Valeur</th>
-<th>Action</th>
+<th class="blue header" >Nom</th>
+<th class="green header">Taille</th>
+<th class="red header">Dernière modification</th>
+<th> description </th>
 </tr>
 </thead>
 
 <tbody>
-{% for u in backup %}
+{% for k in keys %}
+{% if k not in ['.','..'] %}
 <tr>
-<td>{{ u }} </td>
+	<td>{{ k }}</td>
+	<td>{{ backup[k]['size'] }}</td>
+	<td>{{ backup[k]['mtime'] }}</td>
+<td>
+<a class="btn info" data-content="{{ backup[k]['description'] }}" rel="popover" href="#" data-original-title="Description">Description</a></td>
 </tr>
+
+{% endif %}
 {% else %}
 <tr>
 <td>Aucun backup ... :(</td>
@@ -22,5 +35,17 @@
 </tbody>
 
 </table>
+<script>
+            $(function () {
+              $("a[rel=popover]")
+                .popover({
+                  offset: 10,
+		  html: true
+                })
+                .click(function(e) {
+                  e.preventDefault()
+                })
+            })
+          </script>
 {% endblock %}
 

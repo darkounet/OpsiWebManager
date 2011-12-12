@@ -46,12 +46,6 @@ Paquets_details:
 Paquets_creer:
     pattern: /paquets/creer/
     defaults: { _controller: OWMBundle:Paquets:creer }
-Paquets_creer_localboot:
-    pattern: /paquets/creer/localboot/
-    defaults: { _controller: OWMBundle:Paquets:creerLocalBoot }
-Paquets_creer_netboot:
-    pattern: /paquets/creer/netboot/
-    defaults: { _controller: OWMBundle:Paquets:creerNetBoot }
 Paquets_compiler:
     pattern: /paquets/compiler/
     defaults: { _controller: OWMBundle:Paquets:compiler }

@@ -20,7 +20,7 @@ class PaquetsController extends Controller
 	} 
 	public function voirAction()
 	{
-		$paquets=shell_exec("sudo /usr/bin/opsi-admin -rd method getProductIds_list");
+		$paquets=shell_exec("sudo /usr/bin/opsi-admin -rd method productOnDepot_getHashes");
 		$yaml = new Parser();
 		$paquets = $yaml->parse($paquets);
 		return $this->render('OWMBundle:Paquets:voir.html.twig',array('paquets' => $paquets)); 
@@ -31,13 +31,9 @@ class PaquetsController extends Controller
 		$paquets = $yaml->parse($paquets);
 		return $this->render('OWMBundle:Paquets:detail.html.twig',array('paquets' => $paquets));
 	}
-	public function creerAction()
-{
-	return $this->render('OWMBundle:Paquets:creer.html.twig');
-}
-	public function creerLocalBootAction(Request $request)
+	public function creerAction(Request $request)
 	{
-		$defaultData = array();
+	$defaultData = array();
 		$form = $this->createFormBuilder($defaultData)
 			->add('type', 'choice', array('choices' => array('LocalBoot', 'NetBoot')))
 			->add('productId', 'text')
@@ -69,37 +65,12 @@ class PaquetsController extends Controller
 
 		}
 
-		return $this->render('OWMBundle:Paquets:creer_localboot.html.twig',array('form' => $form->createView()));
-		
-	}
-	public function creerNetBootAction(Request $request)
-	{
-		$defaultData = array();
-		$form = $this->createFormBuilder($defaultData)
-			->add('type', 'text')
-			->add('productId', 'text')
-			->add('productName', 'text')
-			->add('description', 'textarea',array('required' => false))
-			->add('advice', 'text',array('required' => false))
-			->add('productVersion', 'text')
-			->add('packageVersion', 'text')
-			->add('licence', 'text',array('required' => false))
-			->add('priority', 'text',array('required' => false))
-			->getForm();
-
-
-		if ($request->getMethod() == 'POST') {
-			$form->bindRequest($request);
-			$data = $form->getData();
-
-			if ($form->isValid()) {
-				 $this->get('session')->setFlash('notice', $data['productId']." créer avec succès !!");
-				return $this->redirect($this->generateUrl('Paquets_voir'));
-			}
-
-		}
-
 		return $this->render('OWMBundle:Paquets:creer.html.twig',array('form' => $form->createView()));
-		
 	}
+	public function compilerAction(Request $request)
+	{
+		$pkg = scandir('/home/opsiproducts/sandbox/');
+		return $this->render('OWMBundle:Paquets:compiler.html.twig',array('paquets' => $pkg));
+	}
+	
 }

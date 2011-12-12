@@ -27,6 +27,7 @@ $('#alert').hide(1000);
 }, 5000);
 </script>
 {% endif %}
+{% if clients %}
 <form id="action_clients" method="POST" action="{{ path('Clients_process') }}">
 <hr>
 <div id="action-div">
@@ -51,6 +52,7 @@ Action : <br><br>
 </p>
 <hr>
 </div>
+
 <table id="clients" class="zebra-striped">
 	<thead>
 		<tr>
@@ -73,14 +75,14 @@ Action : <br><br>
 			<td>{{ host['ipAddress'] }}</td>
 			<td>{{ host['hardwareAddress'] }}</td>
 			<td>Online</td>
-			<td><a href="{{ path('Clients_detail', { 'client' : host['hostId']}) }}"><button class="btn">Editer</button></a>
+			<td>
+<a class="btn primary" href="{{ path('Clients_detail', { 'client' : host['hostId']}) }}">Editer</a>
 <a class="btn danger" 
 data-content="Etes vous sûre ?
-
 <hr>
-<a href='{{ path('Clients_supprimer', { 'client' : host['hostId']}) }}'><button name='confirm_yes' align='center' class='btn success'>Oui</button></a>
+<a href='{{ path('Clients_supprimer', { 'client' : host['hostId']}) }}'>
+<button name='confirm_yes' align='center' class='btn success'>Oui</button></a>
 <button name='confirm_no' align='center' class='btn danger''>Non</button>
-
 " rel="popover" href="#" data-original-title="Confirmation">Supprimer</a>
 			</td>
 			
@@ -132,4 +134,11 @@ $("#check_all").click(function() {
 });
 });
           </script>
+{% else %}
+<div class="hero-unit">
+        <h1>Aucun clients</h1>
+        <p>Il n'existe pas encore de client dans votre dépôt. Vous pouvez en créer un en cliquant sur le bouton suivant '</p>
+        <p><a href="{{ path('Clients_creer')}}"class="btn primary large">Créer client »</a></p>
+      </div>
+{% endif %}
 {% endblock %}

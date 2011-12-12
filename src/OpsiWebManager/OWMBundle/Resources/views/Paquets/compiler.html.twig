@@ -1,0 +1,20 @@
+{% extends "OWMBundle::layout.html.twig" %}
+{% block body %}
+<table class="zebra-striped">
+<thead>
+<tr>
+<th>ProductId</th>
+</tr>
+</thead>
+<tbody>
+{% for pkg in paquets %}
+{% if pkg not in ['.','..'] %}
+<tr>
+<td>{{ pkg }}</td>
+</tr>
+{% endif %}
+{% endfor %}
+</tbody>
+
+</table>
+{% endblock %}

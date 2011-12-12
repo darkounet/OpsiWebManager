@@ -1,19 +1,26 @@
 {% extends "OWMBundle::layout.html.twig" %}
 {% block body %}
-<script type="text/javascript">
-   var test = {{ paquets }};
-   console.log(test);
+<script>
+$(function() {
+$("table#paquets").tablesorter({ sortList: [[1,0]] });
+});
 </script>
-<table class="zebra-striped">
+<table id="paquets" class="zebra-striped">
 <thead>
 <tr>
-<th>ProductId</th>
+<th class="blue header" >ProductId</th>
+<th class="red header" >productVersion</th>
+<th class="green header" >packageVersion</th>
+<th class="purple header" >productType</th>
 </tr>
 </thead>
 <tbody>
 {% for pkg in paquets %}
 <tr>
-<td><a href="{{ path('Paquets_details', { 'pkg' : pkg}) }}"> {{ pkg }}</a></td>
+<td><b>{{ pkg['productId'] }}</b></td>
+<td>{{ pkg['productVersion'] }}</td>
+<td>{{ pkg['packageVersion']}}</td>
+<td>{{ pkg['productType']}}</td>
 </tr>
 {% endfor %}
 </tbody>
