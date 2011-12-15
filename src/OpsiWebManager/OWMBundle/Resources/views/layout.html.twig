@@ -30,10 +30,10 @@
 
 <!--- PAQUETS --!>
                       <a class="menu" href="#">
-			<img src="{{ asset('bundles/owm/images/icons/box.png') }}" >Paquets</a>
+			<img src="{{ asset('bundles/owm/images/icons/box.png') }}" >{{ 'layout.paquets'|trans([],'OWMBundle') }}</a>
                       <ul class="menu-dropdown">
 
-                        <li><a href="{{ path('Paquets') }}">Accueil</a></li>
+                        <li><a href="{{ path('Paquets') }}">{{ 'layout.home'|trans([],'OWMBundle')}}</a></li>
                         <li class="divider"></li>
                         <li><a href="{{ path('Paquets_voir') }}">Lister</a></li>
                         <li class="divider"></li>

@@ -31,14 +31,11 @@ $('#alert').hide(1000);
 <form id="action_clients" method="POST" action="{{ path('Clients_process') }}">
 <hr>
 <div id="action-div">
+
 <p align="center">
-	<span id="nb_client" class="label warning"></span>
-</p>
-<p align="center">
-
-
-
-Action : <br><br>
+<span id="nb_client" class="label warning"></span>
+<hr>
+Action : 
 <select id="mediumSelect" name="client_action" class="small">
 		<option> </option>
                 <option value="Eteindre">Eteindre</option>
@@ -46,8 +43,6 @@ Action : <br><br>
                 <option value="Supprimer">Supprimer</option>
                 <option value="Message">Envoyer Message</option>
               </select>
-<br>
-<br>
 <button class="btn" type="submit">Executer</button>
 </p>
 <hr>
