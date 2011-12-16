@@ -30,18 +30,18 @@
 
 <!--- PAQUETS --!>
                       <a class="menu" href="#">
-			<img src="{{ asset('bundles/owm/images/icons/box.png') }}" >{{ 'layout.paquets'|trans([],'OWMBundle') }}</a>
+			<img src="{{ asset('bundles/owm/images/icons/box.png') }}" >{{ 'layout.menu.products'|trans([],'OWMBundle') }}</a>
                       <ul class="menu-dropdown">
 
-                        <li><a href="{{ path('Paquets') }}">{{ 'layout.home'|trans([],'OWMBundle')}}</a></li>
+                        <li><a href="{{ path('Paquets') }}">{{ 'layout.menu.products.home'|trans([],'OWMBundle')}}</a></li>
                         <li class="divider"></li>
-                        <li><a href="{{ path('Paquets_voir') }}">Lister</a></li>
+                        <li><a href="{{ path('Paquets_voir') }}">{{ 'layout.menu.products.show'|trans([],'OWMBundle')}}</a></li>
                         <li class="divider"></li>
-                        <li><a href="{{ path('Paquets_creer') }}">Créer</a></li>
-                        <li><a href="{{ path('Paquets_compiler') }}">Compiler</a></li>
-                        <li><a href="{{ path('Paquets_installer') }}">Installer</a></li>
+                        <li><a href="{{ path('Paquets_creer') }}">{{ 'layout.menu.products.create'|trans([],'OWMBundle')}}</a></li>
+                        <li><a href="{{ path('Paquets_compiler') }}">{{ 'layout.menu.products.compil'|trans([],'OWMBundle')}}</a></li>
+                        <li><a href="{{ path('Paquets_installer') }}">{{ 'layout.menu.products.install'|trans([],'OWMBundle')}}</a></li>
                         <li class="divider"></li>
-                        <li><a href="{{ path('Paquets_desinstaller') }}">Désinstaller</a></li>
+                        <li><a href="{{ path('Paquets_desinstaller') }}">{{ 'layout.menu.products.uninstall'|trans([],'OWMBundle')}}</a></li>
                       </ul>
                     </li>
 			</ul>
@@ -49,11 +49,11 @@
 			<ul>
 			<li class="menu">
 
-                      <a class="menu" href="#">Clients</a>
+                      <a class="menu" href="#">{{ 'layout.menu.clients'|trans([],'OWMBundle') }}</a>
                       <ul class="menu-dropdown">
-                        <li><a href="{{ path('Clients_voir') }}">Lister</a></li>
+                        <li><a href="{{ path('Clients_voir') }}">{{ 'layout.menu.clients.home'|trans([],'OWMBundle') }}</a></li>
                         <li class="divider"></li>
-                        <li><a href="{{ path('Clients_creer') }}">Créer</a></li>
+                        <li><a href="{{ path('Clients_creer') }}">{{ 'layout.menu.clients.create'|trans([],'OWMBundle') }}</a></li>
                       </ul>
                     </li>
                   </ul>
@@ -62,12 +62,11 @@
                         <ul>
                         <li class="menu">
 
-                      <a class="menu" href="#">Backups</a>
+                      <a class="menu" href="#">{{ 'layout.menu.backups'|trans([],'OWMBundle') }}</a>
                       <ul class="menu-dropdown">
-                        <li><a href="{{ path('Backup') }}">Lister</a></li>
+                        <li><a href="{{ path('Backup') }}">{{ 'layout.menu.backups.home'|trans([],'OWMBundle') }}</a></li>
                         <li class="divider"></li>
-                        <li><a href="#">Detail</a></li>
-                        <li><a href="#">Supprimer</a></li>
+                        <li><a href="#">{{ 'layout.menu.backups.delete'|trans([],'OWMBundle') }}</a></li>
                       </ul>
                     </li>
                   </ul>
@@ -76,11 +75,11 @@
                         <ul>
                         <li class="menu">
 
-                                      <a class="menu" href="#">Configuration</a>
+                                      <a class="menu" href="#">{{ 'layout.menu.settings'|trans([],'OWMBundle') }}</a>
                       <ul class="menu-dropdown">
-                        <li><a href="{{ path('Configuration_voir') }}">Voir</a></li>
+                        <li><a href="{{ path('Configuration_voir') }}">{{ 'layout.menu.settings.show'|trans([],'OWMBundle') }}</a></li>
                         <li class="divider"></li>
-                        <li><a href="{{ path('Configuration_modifier') }}">Modifier</a></li>
+                        <li><a href="{{ path('Configuration_modifier') }}">{{ 'layout.menu.settings.modify'|trans([],'OWMBundle') }}</a></li>
                       </ul>
                     </li>
                   </ul>

@@ -1,47 +1,48 @@
 <?xml version="1.0"?>
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
-    <file source-language="en" datatype="plaintext" original="file.ext">
+    <file source-language="fr" datatype="plaintext" original="file.ext">
         <body>
+<!-- PRODUCTS MENU -->
             <trans-unit id="1">
                 <source>layout.menu.products</source>
-                <target>Products</target>
+                <target>Produkte</target>
             </trans-unit>
             <trans-unit id="2">
 		<source>layout.menu.products.home</source>
-		<target>Home</target>
+		<target>Accueil</target>
             </trans-unit>
         <trans-unit id="3">
                 <source>layout.menu.products.show</source>
-                <target>Show</target>
+                <target>Anzeige</target>
         </trans-unit>
         <trans-unit id="4">
                 <source>layout.menu.products.create</source>
-                <target>Create</target>
+                <target>Schaffen</target>
         </trans-unit>
         <trans-unit id="5">
                 <source>layout.menu.products.compil</source>
-                <target>Compil</target>
+                <target>Kompilieren</target>
         </trans-unit>
         <trans-unit id="6">
                 <source>layout.menu.products.install</source>
-                <target>Install</target>
+                <target>Installieren</target>
         </trans-unit>
         <trans-unit id="7">
                 <source>layout.menu.products.uninstall</source>
-                <target>Uninstall</target>
+                <target>Deinstallieren</target>
         </trans-unit>
 <!-- CLIENTS MENU -->
         <trans-unit id="8">
                 <source>layout.menu.clients</source>
-                <target>Clients</target>
+                <target>Kunden</target>
         </trans-unit>
         <trans-unit id="9">
 	        <source>layout.menu.clients.home</source>
-		<target>Home</target>
+		<target>Accueil</target>
         </trans-unit>
         <trans-unit id="10">
                 <source>layout.menu.clients.create</source>
-                <target>Create</target>
+                <target>Schaffen</target>
         </trans-unit>
 <!-- BACKUPS MENU -->
         <trans-unit id="11">
@@ -50,24 +51,24 @@
         </trans-unit>
         <trans-unit id="12">
 	        <source>layout.menu.backups.home</source>
-		<target>Home</target>
+		<target>Accueil</target>
         </trans-unit>
         <trans-unit id="13">
 	        <source>layout.menu.backups.delete</source>
-		<target>Delete</target>
+		<target>entfernen</target>
         </trans-unit>
 <!-- SETTINGS MENU -->
         <trans-unit id="14">
                 <source>layout.menu.settings</source>
-                <target>Settings</target>
+                <target>Konfiguration</target>
         </trans-unit>
         <trans-unit id="15">
 	        <source>layout.menu.settings.show</source>
-		<target>Show</target>
+		<target>Sehen</target>
         </trans-unit>
         <trans-unit id="16">
 	        <source>layout.menu.settings.modify</source>
-		<target>Modify</target>
+		<target>Änderung</target>
         </trans-unit>
         </body>
     </file>
