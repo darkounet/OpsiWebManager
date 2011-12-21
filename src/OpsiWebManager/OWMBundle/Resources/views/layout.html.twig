@@ -28,7 +28,6 @@
                   <ul>
                     <li class="menu">
 
-<!--- PAQUETS --!>
                       <a class="menu" href="#">
 			<img src="{{ asset('bundles/owm/images/icons/box.png') }}" >{{ 'layout.menu.products'|trans([],'OWMBundle') }}</a>
                       <ul class="menu-dropdown">
@@ -45,7 +44,7 @@
                       </ul>
                     </li>
 			</ul>
-<!--- CLIENTS --!>
+
 			<ul>
 			<li class="menu">
 
@@ -54,11 +53,13 @@
                         <li><a href="{{ path('Clients_voir') }}">{{ 'layout.menu.clients.home'|trans([],'OWMBundle') }}</a></li>
                         <li class="divider"></li>
                         <li><a href="{{ path('Clients_creer') }}">{{ 'layout.menu.clients.create'|trans([],'OWMBundle') }}</a></li>
+			<li class="divider"></li>
+                        <li><a href="{{ path('Clients_import') }}">import</a></li>
+			
                       </ul>
                     </li>
                   </ul>
 
-<!--- BACKUPS --!>
                         <ul>
                         <li class="menu">
 
@@ -71,7 +72,6 @@
                     </li>
                   </ul>
 
-<!--- CONFIGURATION --!>
                         <ul>
                         <li class="menu">
 

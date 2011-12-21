@@ -111,6 +111,7 @@ $("#check_all").click(function() {
                 $('#action-div').hide('fast');
         };
 });
+
 	if(this.checked){
 		$('#nb_client').html((($(":checkbox:checked").length)) + " clients");
                 $('#action-div').show('fast');
@@ -132,8 +133,9 @@ $("#check_all").click(function() {
 {% else %}
 <div class="hero-unit">
         <h1>Aucun clients</h1>
-        <p>Il n'existe pas encore de client dans votre dépôt. Vous pouvez en créer un en cliquant sur le bouton suivant '</p>
-        <p><a href="{{ path('Clients_creer')}}"class="btn primary large">Créer client »</a></p>
+        <p>Il n'existe pas encore de client dans votre dépôt. </p>
+	<p>Vous pouvez en créer un en cliquant sur le bouton "Créer client", <br> Ou en importer depuis un fichier .CSV en cliquant sur le bouton "Importer client"</p>
+        <p><a href="{{ path('Clients_creer')}}"class="btn primary large">Créer client »</a><a href="{{ path('Clients_import')}}"class="btn large">Importer client »</a></p>
       </div>
 {% endif %}
 {% endblock %}

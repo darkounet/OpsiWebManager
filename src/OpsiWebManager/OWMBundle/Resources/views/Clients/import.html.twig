@@ -1,0 +1,21 @@
+{% extends "OWMBundle::layout.html.twig" %}
+{% block body %}
+<div class="hero-unit">
+<h2 align="center">Choissisez votre fichier</h2>
+<div style="padding: 16px 19px;" class="well" align="center">
+<span class="label notice">Information</span><br>
+Le fichier .csv doit etre de la forme suivante :<br>
+<b>nom,domaine,description,notes,ip,mac</b>
+</div>
+<form action="{{ path('Clients_import') }}" method="POST" {{ form_enctype(form) }}>
+<p align="center">
+{{ form_widget(form.CSV) }}
+</p>
+{{ form_rest(form) }}
+<p align="center">
+    <input type="submit" />
+</p>
+</form>
+</div>
+
+{% endblock %}

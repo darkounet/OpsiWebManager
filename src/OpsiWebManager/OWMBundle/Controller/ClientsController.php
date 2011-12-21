@@ -56,23 +56,21 @@ class ClientsController extends Controller
 	}
 	public function processAction()
 	{
-$action = $this->getRequest()->get('client_action');
+		$action = $this->getRequest()->get('client_action');
 
-if ($action == 'Supprimer')
-{
-
-
-$clients = $this->getRequest()->get('clients');
-$i=0;
-foreach ($clients as $client)
-{
-	shell_exec("sudo /usr/bin/opsi-admin -d method host_delete ".$client);
-$i++;
-}
-$this->get('session')->setFlash('notice',$i." clients supprimer avec succès !!");
-	return $this->redirect($this->generateUrl('Clients_voir'));
-}
-return $this->redirect($this->generateUrl('Clients_voir'));
+		if ($action == 'Supprimer')
+		{
+			$clients = $this->getRequest()->get('clients');
+			$i=0;
+			foreach ($clients as $client)
+			{
+				shell_exec("sudo /usr/bin/opsi-admin -d method host_delete ".$client);
+				$i++;
+			}
+			$this->get('session')->setFlash('notice',$i." clients supprimer avec succès !!");
+		return $this->redirect($this->generateUrl('Clients_voir'));
+		}
+		return $this->redirect($this->generateUrl('Clients_voir'));
 	}
 	public function creerAction(Request $request)
 	{
@@ -100,5 +98,33 @@ return $this->redirect($this->generateUrl('Clients_voir'));
 		}
 
 		return $this->render('OWMBundle:Clients:creer.html.twig',array('form' => $form->createView()));
+	}
+	public function importAction(Request $request)
+	{
+		$form = $this->createFormBuilder()
+			->add("CSV","file")
+			->getForm();
+		
+		
+		if ($request->getMethod() == 'POST') {
+			$form->bindRequest($request);
+			$data = $form->getData();
+			$csv = $data['CSV'];
+			$lines =file($csv,FILE_SKIP_EMPTY_LINES);
+			$nb = count($lines);
+			foreach($lines as $data)
+			{
+			list($name,$domain,$description,$notes,$ipaddr,$macaddr)= explode(',',$data);
+			shell_exec("sudo /usr/bin/opsi-admin -d method createClient '".$name."' '".$domain."' '".$description."' '".$notes."' '".$ipaddr."' '".$macaddr."'");
+			}
+			
+			
+			if ($form->isValid()) {
+				$this->get('session')->setFlash('notice', $nb." Clients importés avec succès !!");
+				return $this->redirect($this->generateUrl('Clients_voir'));
+			}
+		
+		}
+return $this->render('OWMBundle:Clients:import.html.twig',array('form' => $form->createView()));
 	}
 }

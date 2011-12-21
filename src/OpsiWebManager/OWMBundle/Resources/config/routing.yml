@@ -16,6 +16,9 @@ Clients:
 Clients_process:
     pattern: /clients/process/
     defaults: { _controller: OWMBundle:Clients:process }
+Clients_import:
+    pattern: /clients/import/
+    defaults: { _controller: OWMBundle:Clients:import }
 Clients_voir:
     pattern: /clients/voir/
     defaults: { _controller: OWMBundle:Clients:voir }
