@@ -73,6 +73,14 @@ Custom
 {{ form_widget(form.logon) }}
 Logon
 </p>
+
+<div class="actions">
+	<p>{{ form_widget(form.authorname) }}</p>
+	<p>
+	<div class="input-prepend">
+		<span class="add-on">@</span>{{ form_widget(form.authormail) }}</p>
+	</div>
+</div>
           </div>
         </div>
 {{ form_rest(form) }}

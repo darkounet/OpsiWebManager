@@ -51,6 +51,8 @@ class PaquetsController extends Controller
 			->add('once','checkbox',array('label' => 'once','required' => false))
 			->add('custom','checkbox',array('label' => 'custom','required' => false))
 			->add('logon','checkbox',array('label' => 'logon','required' => false))
+			->add('authorname','text')
+			->add('authormail','text')
 			->getForm();
 
 
