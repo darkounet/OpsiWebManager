@@ -20,10 +20,16 @@ class PaquetsController extends Controller
 	} 
 	public function voirAction()
 	{
-		$paquets=shell_exec("sudo /usr/bin/opsi-admin -rd method productOnDepot_getHashes");
+#		$paquets=shell_exec("sudo /usr/bin/opsi-admin -rd method productOnDepot_getHashes");
 		$yaml = new Parser();
+		$depot=shell_exec("sudo /usr/bin/opsi-admin -rd method getDepotIds_list");
+		$depot= $yaml->parse($depot);
+		$paquets=shell_exec("LANG=en_US.utf-8; sudo /usr/bin/opsi-admin -rd method getProducts_hash");
 		$paquets = $yaml->parse($paquets);
-		return $this->render('OWMBundle:Paquets:voir.html.twig',array('paquets' => $paquets)); 
+#		echo '<pre>';
+#print_r($depot);
+#exit();
+		return $this->render('OWMBundle:Paquets:voir.html.twig',array('paquets' => $paquets[$depot[0]])); 
 	}
 	public function detailAction($pkg){
 		$paquets=shell_exec("sudo /usr/bin/opsi-admin -rd method getProduct_hash '".$pkg."'");

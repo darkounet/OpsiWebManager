@@ -20,6 +20,7 @@ class ClientsController extends Controller
 		$clients=shell_exec("sudo opsi-admin -rd method getClients_listOfHashes");
 		$yaml = new Parser();
 		$clients = $yaml->parse($clients);
+		
 		return $this->render('OWMBundle:Clients:voir.html.twig',array('clients' => $clients)); 
 	}
 	public function detailAction($client)
@@ -43,8 +44,14 @@ class ClientsController extends Controller
 			"minutes" => substr($client['lastSeen'], 10, -2),
 			"secondes" => substr($client['lastSeen'],12)
 		);
-
-		return $this->render('OWMBundle:Clients:detail.html.twig',array('client' => $client, 'created' => $created, 'lastSeen' => $lastSeen)); 		
+		$hwaudit=shell_exec("LANG=en_US.utf-8; sudo /usr/bin/opsi-admin -rd method getHardwareInformation_hash '".$client['hostId']."'");
+		$hwaudit=$yaml->parse($hwaudit);
+		$swaudit=shell_exec("LANG=en_US.utf-8; sudo /usr/bin/opsi-admin -rd method getSoftwareInformation_hash '".$client['hostId']."'");
+		$swaudit=$yaml->parse($swaudit);
+#		echo "<pre>";	
+#		print_r($swaudit);
+#		exit();
+		return $this->render('OWMBundle:Clients:detail.html.twig',array('client' => $client, 'created' => $created, 'lastSeen' => $lastSeen, 'hwaudit' => $hwaudit,'swaudit' => $swaudit)); 		
 	}
 	public function supprimerAction($client)
 	{
@@ -68,7 +75,70 @@ class ClientsController extends Controller
 				$i++;
 			}
 			$this->get('session')->setFlash('notice',$i." clients supprimer avec succès !!");
-		return $this->redirect($this->generateUrl('Clients_voir'));
+			return $this->redirect($this->generateUrl('Clients_voir'));
+		}
+		else if ($action == 'Message')
+		{
+			$clients = $this->getRequest()->get('clients');
+			$message = $this->getRequest()->get('message_client');
+			$i=0;
+			foreach ($clients as $client)
+			{
+				shell_exec("sudo /usr/bin/opsi-admin -d method hostControl_showPopup '".$message."' '".$client."'");
+				$i++;
+			}
+			$this->get('session')->setFlash('notice',"message envoyé à ".$i." avec succès !!");
+			return $this->redirect($this->generateUrl('Clients_voir'));
+		}
+		else if ($action == 'Eteindre')
+		{
+			$clients = $this->getRequest()->get('clients');
+			$i=0;
+			foreach ($clients as $client)
+			{
+				shell_exec("sudo /usr/bin/opsi-admin -d method hostControl_shutdown '".$client."'");
+				$i++;
+			}
+			$this->get('session')->setFlash('notice',$i." machines éteintes avec succès !!");
+			return $this->redirect($this->generateUrl('Clients_voir'));
+
+		}
+		else if ($action == 'Redemarrer')
+		{
+		$clients = $this->getRequest()->get('clients');
+			$i=0;
+			foreach ($clients as $client)
+			{
+				shell_exec("sudo /usr/bin/opsi-admin -d method hostControl_reboot '".$client."'");
+				$i++;
+			}
+			$this->get('session')->setFlash('notice',$i." machines redémarrées avec succès !!");
+			return $this->redirect($this->generateUrl('Clients_voir'));
+		}
+		else if ($action == 'Exporter')
+		{
+			$clients = $this->getRequest()->get('clients');
+			$i=0;
+			$file="clients.csv";
+			$path = __DIR__ . '/../../../../web/tmp/';
+			if (!is_dir($path)) {
+				mkdir($path, 0755, true);
+			}
+
+			$csv=fopen($path . $file,'w+');
+			foreach ($clients as $client)
+			{
+				$info = shell_exec("sudo /usr/bin/opsi-admin -rd method getHost_hash ".$client);
+				$yaml = new Parser();
+				$info = $yaml->parse($info);
+				fputcsv($csv,$info);
+				$i++;
+			}
+			fclose($csv);
+			$this->get('session')->setFlash('export',$i." clients exporter avec succès !!");
+			return $this->redirect($this->generateUrl('Clients_voir'));
+	
+			
 		}
 		return $this->redirect($this->generateUrl('Clients_voir'));
 	}

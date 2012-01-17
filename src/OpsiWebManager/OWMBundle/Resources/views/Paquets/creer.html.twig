@@ -6,7 +6,10 @@
 
 <div class="row" align="center">
           <div class="span12" align="left">
-            <h2>Information</h2>
+<div class="alert-message block-message">
+            <h2 align="center">Information</h2>
+</div>
+<div class="alert-message block-message" align="center">
 		<p>{{ form_label(form.type) }}
 {{ form_widget(form.type) }}</p>
 
@@ -41,10 +44,15 @@
 
 <p>{{ form_label(form.priority) }}
 {{ form_widget(form.priority) }}</p>
+</div>
           </div>
 
           <div class="span12" align="left">
-            <h3>Fichiers</h3>
+
+<div class="alert-message block-message info">
+<h2 align="center">Fichiers</h2>
+</div>
+<div class="alert-message block-message info">
 <p>
 {{ form_widget(form.install) }}
 Install
@@ -73,16 +81,18 @@ Custom
 {{ form_widget(form.logon) }}
 Logon
 </p>
+      </div>
 
+          </div>
+        </div>
 <div class="actions">
+<h3>Auteur</h3>
 	<p>{{ form_widget(form.authorname) }}</p>
 	<p>
 	<div class="input-prepend">
 		<span class="add-on">@</span>{{ form_widget(form.authormail) }}</p>
 	</div>
 </div>
-          </div>
-        </div>
 {{ form_rest(form) }}
     <input type="submit" />
 </form>

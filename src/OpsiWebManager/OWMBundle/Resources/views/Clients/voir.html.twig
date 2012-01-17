@@ -14,6 +14,18 @@ $("table#clients").tablesorter({
 		},
 	sortList: [[1,0]]
 	});
+$('#action_message').hide();
+$('#action_dl_cvs').hide();
+
+$('#mediumSelect').change(function() {
+	var choix = $(this).val();
+	if (choix == "Message") {
+	$('#action_message').show("slow");
+	}
+	else { $('#action_message').hide(); }
+
+});
+
 });
 </script>
 {% if app.session.hasFlash('notice') %}
@@ -27,6 +39,16 @@ $('#alert').hide(1000);
 }, 5000);
 </script>
 {% endif %}
+{% if app.session.hasFlash('export') %}
+<script>
+$(function(){
+$('#action-div').show();
+$('#action_dl_cvs').show();
+
+});
+
+</script>
+{% endif %}
 {% if clients %}
 <form id="action_clients" method="POST" action="{{ path('Clients_process') }}">
 <hr>
@@ -35,15 +57,57 @@ $('#alert').hide(1000);
 <p align="center">
 <span id="nb_client" class="label warning"></span>
 <hr>
-Action : 
-<select id="mediumSelect" name="client_action" class="small">
+<div class="quickstart">
+      <div class="container">
+        <div class="row">
+          <div class="span5">
+            <h6>Action</h6>
+<p>
+<select id="mediumSelect" name="client_action" class="medium">
 		<option> </option>
                 <option value="Eteindre">Eteindre</option>
                 <option value="Reveiller">Réveiller</option>
-                <option value="Supprimer">Supprimer</option>
+                <option value="Redemarrer">Redémarrer</option>
+		<option value="Supprimer">Supprimer</option>
                 <option value="Message">Envoyer Message</option>
+		<option value="Exporter">Exporter</option>
               </select>
-<button class="btn" type="submit">Executer</button>
+</p>
+          </div>
+          <div class="span5">
+            <h6>Validation</h6>
+<p>
+            <button class="btn large primary" type="submit">Executer</button>
+</p>
+          </div>
+          <div class="span5">
+		<p>
+			<div id="action_message">
+				<h6>Message</h6>
+					<textarea rows="3" name="message_client" class="xxlarge"></textarea>
+			</div>
+			<div id="action_dl_cvs">
+				<h6>Téléchargement .csv</h6>
+				<p><a href="{{ asset('tmp/clients.csv') }}"><img src="{{ asset('bundles/owm/images/icons/woofunction/save_download_32.png') }}"></a></p>
+			</div>
+		</p>
+
+          </div>
+        </div><!-- /row -->
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
 </p>
 <hr>
 </div>
@@ -68,7 +132,7 @@ Action :
 			<td><input type="checkbox" value="{{ host['hostId'] }}" name="clients[]"></td>
 			<td id='hostid'>{{ host['hostId'] }} </td>
 			<td>{{ host['ipAddress'] }}</td>
-			<td>{{ host['hardwareAddress'] }}</td>
+			<td>{{ host['hardwareAddress'] | upper }}</td>
 			<td>Online</td>
 			<td>
 <a class="btn primary" href="{{ path('Clients_detail', { 'client' : host['hostId']}) }}">Editer</a>

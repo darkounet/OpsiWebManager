@@ -1,18 +1,196 @@
 {% extends "OWMBundle::layout.html.twig" %}
 {% block body %}
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('.tabs').tabs()
+		$("#browser").treeview({
+			toggle: function() {
+				console.log("%s was toggled.", $(this).find(">span").text());
+			}
+		});
+		
+		$("#add").click(function() {
+			var branches = $("<li><span class='folder'>New Sublist</span><ul>" + 
+				"<li><span class='file'>Item1</span></li>" + 
+				"<li><span class='file'>Item2</span></li></ul></li>").appendTo("#browser");
+			$("#browser").treeview({
+				add: branches
+			});
+		});
+		$("table#swaudit").tablesorter({ sortList: [[1,0]] });
+	});
+</script>
 <div class="hero-unit" align="center">
-<h1>{{ client['hostId'] }}</h1>
-<h2>{{ client['ipAddress'] }}</h2>
-<h3>{{ client['hardwareAddress'] }}</h3>
+	<h1>{{ client['hostId'] }}</h1>
+	<h2>{{ client['ipAddress'] }}</h2>
+	<h3>{{ client['hardwareAddress'] | upper}}</h3>
 </div>
 <hr/>
-<div class="hero-unit">
-<p>Description : {{ client['description'] }}<p>
-<p>Date de création : {{ created['annee'] }}/{{ created['mois'] }}/{{ created['jours'] }} à {{ created['heures'] }}:{{created['minutes'] }}:{{ created['secondes'] }}</p>
-<p>Numero d'inventaire : {{ client['inventoryNumber'] }}</p>
-<p>Notes : {{ client['notes'] }}</p>
+<div class="well" style="padding: 14px 19px;">
+<ul class="tabs">
+	<li class="active"><a href="#informations">Informations</a></li>
+	<li><a href="#hwaudit">Materiel</a></li>
+	<li><a href="#swaudit">Logiciel</a></li>
+	<li><a href="#settings">Parametres</a></li>
+</ul>
 
-<p>Derniere fois vu : {{ lastSeen['annee'] }}/{{ lastSeen['mois'] }}/{{ lastSeen['jours'] }} à {{ lastSeen['heures'] }}:{{lastSeen['minutes'] }}:{{ lastSeen['secondes'] }}</p>
+<div class="pill-content">
+	<div class="active" id="informations">
+<!--DEBUT DIV INFORMATIONS-->
+	<p>Description : {{ client['description'] }}<p>
+	<p>Date de création : {{ created['annee'] }}/{{ created['mois'] }}/{{ created['jours'] }} à {{ created['heures'] }}:{{created['minutes'] }}:{{ created['secondes'] }}</p>
+	<p>Numero d'inventaire : {{ client['inventoryNumber'] }}</p>
+	<p>Notes : {{ client['notes'] }}</p>
+	<p>Derniere fois vu : {{ lastSeen['annee'] }}/{{ lastSeen['mois'] }}/{{ lastSeen['jours'] }} à {{ lastSeen['heures'] }}:{{lastSeen['minutes'] }}:{{ lastSeen['secondes'] }}</p>
+
+<!--FIN DIV INFORMATIONS-->
 </div>
+<div id="hwaudit">
+<!--DEBUT DIV HWAUDIT-->
+{% if hwaudit|length > 2 %}
+<ul class="filetree treeview-gray treeview" id="browser">
+		<li class="expandable lastExpandable"><div class="hitarea expandable-hitarea lastExpandable-hitarea"></div><span class="folder">Hardware</span>
+			<ul style="display: none;">
+				
+				<li class="expandable"><div class="hitarea expandable-hitarea"></div><span class="folder">Audio</span>
+					{% for audio in hwaudit['AUDIO_CONTROLLER'] %}
+					<ul style="display: none;">
+						<li class="last"><span class="file"><b>{{ audio['name'] }}</b></span></li>
+					</ul>
+					{% endfor %}
+				</li>
+
+				<li class="expandable"><div class="hitarea expandable-hitarea"></div><span class="folder">PCI</span>
+					{% for pci in hwaudit['PCI_DEVICE'] %}
+					<ul style="display: none;">
+						<li class="last"><span class="file"><b>{{ pci['name'] }}</b></span></li>
+					</ul>
+					{% endfor %}
+				</li>
+				<li class="expandable"><div class="hitarea expandable-hitarea"></div><span class="folder">Monitor</span>
+					{% for monitor in hwaudit['MONITOR'] %}
+					<ul style="display: none;">
+						<li class="last"><span class="file"><b>{{ monitor['name'] }}</b></span></li>
+					</ul>
+					{% endfor %}
+				</li>
+				<li class="expandable"><div class="hitarea expandable-hitarea"></div><span class="folder">HDD</span>
+					{% for hdd in hwaudit['HARDDISK_DRIVE'] %}
+					<ul style="display: none;">
+						<li class="last"><span class="file"><b>{{ hdd['name'] }}</b></span></li>
+					</ul>
+					{% endfor %}
+				</li>
+				<li class="expandable"><div class="hitarea expandable-hitarea"></div><span class="folder">BIOS</span>
+					{% for bios in hwaudit['BIOS'] %}
+					<ul style="display: none;">
+						<li class="last"><span class="file"><b>{{ bios['name'] }}</b></span></li>
+					</ul>
+					{% endfor %}
+				</li>
+				<li class="expandable"><div class="hitarea expandable-hitarea"></div><span class="folder">Optical</span>
+					{% for optical in hwaudit['OPTICAL_DRIVE'] %}
+					<ul style="display: none;">
+						<li class="last"><span class="file"><b>{{ optical['name'] }}</b></span></li>
+					</ul>
+					{% endfor %}
+				</li>
+				<li class="expandable"><div class="hitarea expandable-hitarea"></div><span class="folder">System</span>
+					{% for system in hwaudit['COMPUTER_SYSTEM'] %}
+					<ul style="display: none;">
+						<li class="last"><span class="file"><b>{{ system['name'] }}</b></span></li>
+					</ul>
+					{% endfor %}
+				</li>
+				<li class="expandable"><div class="hitarea expandable-hitarea"></div><span class="folder">Keyboard</span>
+					{% for keyboard in hwaudit['KEYBOARD'] %}
+					<ul style="display: none;">
+						<li class="last"><span class="file"><b>{{ keyboard['name'] }}</b></span></li>
+					</ul>
+					{% endfor %}
+				</li>
+				<li class="expandable"><div class="hitarea expandable-hitarea"></div><span class="folder">Pointing</span>
+					{% for pointing in hwaudit['POINTING_DEVICE'] %}
+					<ul style="display: none;">
+						<li class="last"><span class="file"><b>{{ pointing['name'] }}</b></span></li>
+					</ul>
+					{% endfor %}
+				</li>
+				<li class="expandable"><div class="hitarea expandable-hitarea"></div><span class="folder">Partition</span>
+					{% for partition in hwaudit['DISK_PARTITION'] %}
+					<ul style="display: none;">
+						<li class="last"><span class="file"><b>{{ partition['name'] }}</b></span></li>
+					</ul>
+					{% endfor %}
+				</li>
+				<li class="expandable"><div class="hitarea expandable-hitarea"></div><span class="folder">Network</span>
+					{% for network in hwaudit['NETWORK_CONTROLLER'] %}
+					<ul style="display: none;">
+						<li class="last"><span class="file"><b>{{ network['name'] }}</b></span></li>
+					</ul>
+					{% endfor %}
+				</li>
+				<li class="expandable"><div class="hitarea expandable-hitarea"></div><span class="folder">Video</span>
+					{% for video in hwaudit['VIDEO_CONTROLLER'] %}
+					<ul style="display: none;">
+						<li class="last"><span class="file"><b>{{ video['name'] }}</b></span></li>
+					</ul>
+					{% endfor %}
+				</li>
+				<li class="expandable"><div class="hitarea expandable-hitarea"></div><span class="folder">Processor</span>
+					{% for processor in hwaudit['PROCESSOR'] %}
+					<ul style="display: none;">
+						<li class="last"><span class="file"><b>{{ processor['name'] }}</b></span></li>
+					</ul>
+					{% endfor %}
+				</li>
+				<li class="expandable"><div class="hitarea expandable-hitarea"></div><span class="folder">IDE</span>
+					{% for ide in hwaudit['IDE_CONTROLLER'] %}
+					<ul style="display: none;">
+						<li class="last"><span class="file"><b>{{ ide['name'] }}</b></span></li>
+					</ul>
+					{% endfor %}
+				</li>
+
+			</ul>
+		</li>
+				
+	</ul>
+{% endif %}
+<!--FIN DIV HWAUDIT-->
+</div>
+<div id="swaudit">
+
+<table id="swaudit" class="zebra-striped" border="1">
+<thead>
+<tr>
+<th class="blue header" >Nom</th>
+<th class="green header">Version</th>
+<th class="red header">description</th>
+</tr>
+</thead>
+
+<tbody>
+{% for soft in swaudit %}
+{% if soft['scantime'] is not defined %}
+<tr>
+	<td>{{ soft['softwareId'] }}</td>
+	<td>{{ soft['displayVersion'] }}</td>
+	<td>{{ soft['displayName'] }}</td>
+<td>
+</tr>
+{% endif %}
+{% endfor %}
+</tbody>
+
+</table>
+
+
+</div>
+    <div id="settings">...</div>
+    </div>
+     </div>
+
+
 
 {% endblock %}

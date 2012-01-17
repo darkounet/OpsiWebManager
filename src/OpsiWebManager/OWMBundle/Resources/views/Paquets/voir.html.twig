@@ -15,15 +15,27 @@ $("table#paquets").tablesorter({ sortList: [[1,0]] });
 </tr>
 </thead>
 <tbody>
-{% for pkg in paquets %}
+{% for key, pkg in paquets %}
 <tr>
-<td><b>{{ pkg['productId'] }}</b></td>
+<td><b><a data-content="{{ pkg['description']}}" rel="popover" href="#" data-original-title="Description">{{ key|upper }}</a></b></td>
 <td>{{ pkg['productVersion'] }}</td>
-<td>{{ pkg['packageVersion']}}</td>
-<td>{{ pkg['productType']}}</td>
+<td>{{ pkg['packageVersion'] }}</td>
+<td>{{ pkg['productType'] }}</td>
 </tr>
 {% endfor %}
 </tbody>
 
 </table>
+
+<script>
+            $(function () {
+              $("a[rel=popover]")
+                .popover({
+                  offset: 10
+                })
+                .click(function(e) {
+                  e.preventDefault()
+                })
+            })
+          </script>
 {% endblock %}
