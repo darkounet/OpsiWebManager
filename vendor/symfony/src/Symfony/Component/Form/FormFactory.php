@@ -220,9 +220,15 @@ class FormFactory implements FormFactoryInterface
 
         while (null !== $type) {
             if ($type instanceof FormTypeInterface) {
+                if ($type->getName() == $type->getParent($options)) {
+                    throw new FormException(sprintf('The form type name "%s" for class "%s" cannot be the same as the parent type.', $type->getName(), get_class($type)));
+                }
+
                 $this->addType($type);
-            } else {
+            } elseif (is_string($type)) {
                 $type = $this->getType($type);
+            } else {
+                throw new UnexpectedTypeException($type, 'string or Symfony\Component\Form\FormTypeInterface');
             }
 
             $defaultOptions = $type->getDefaultOptions($options);

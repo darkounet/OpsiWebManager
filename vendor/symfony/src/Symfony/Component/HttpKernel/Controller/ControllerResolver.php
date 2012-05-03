@@ -95,7 +95,7 @@ class ControllerResolver implements ControllerResolverInterface
     {
         if (is_array($controller)) {
             $r = new \ReflectionMethod($controller[0], $controller[1]);
-        } elseif (is_object($controller)) {
+        } elseif (is_object($controller) && !$controller instanceof \Closure) {
             $r = new \ReflectionObject($controller);
             $r = $r->getMethod('__invoke');
         } else {
@@ -145,7 +145,7 @@ class ControllerResolver implements ControllerResolverInterface
             throw new \InvalidArgumentException(sprintf('Unable to find controller "%s".', $controller));
         }
 
-        list($class, $method) = explode('::', $controller);
+        list($class, $method) = explode('::', $controller, 2);
 
         if (!class_exists($class)) {
             throw new \InvalidArgumentException(sprintf('Class "%s" does not exist.', $class));

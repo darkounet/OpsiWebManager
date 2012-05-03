@@ -13,6 +13,10 @@ namespace Symfony\Bundle\FrameworkBundle\Templating\Helper;
 
 use Symfony\Component\Templating\Helper\Helper;
 
+if (!defined('ENT_SUBSTITUTE')) {
+    define('ENT_SUBSTITUTE', 8);
+}
+
 /**
  * CodeHelper.
  *
@@ -22,17 +26,20 @@ class CodeHelper extends Helper
 {
     protected $fileLinkFormat;
     protected $rootDir;
+    protected $charset;
 
     /**
      * Constructor.
      *
      * @param string $fileLinkFormat The format for links to source files
      * @param string $rootDir        The project root directory
+     * @param string $charset        The charset
      */
-    public function __construct($fileLinkFormat, $rootDir)
+    public function __construct($fileLinkFormat, $rootDir, $charset)
     {
         $this->fileLinkFormat = empty($fileLinkFormat) ? ini_get('xdebug.file_link_format') : $fileLinkFormat;
         $this->rootDir = str_replace('\\', '/', $rootDir).'/';
+        $this->charset = $charset;
     }
 
     /**
@@ -79,9 +86,9 @@ class CodeHelper extends Helper
     public function abbrMethod($method)
     {
         if (false !== strpos($method, '::')) {
-            list($class, $method) = explode('::', $method);
+            list($class, $method) = explode('::', $method, 2);
             $result = sprintf("%s::%s()", $this->abbrClass($class), $method);
-        } else if ('Closure' === $method) {
+        } elseif ('Closure' === $method) {
             $result = sprintf("<abbr title=\"%s\">%s</abbr>", $method, $method);
         } else {
             $result = sprintf("<abbr title=\"%s\">%s</abbr>()", $method, $method);
@@ -173,7 +180,7 @@ class CodeHelper extends Helper
         }
 
         if (false !== $link = $this->getFileLink($file, $line)) {
-            return sprintf('<a href="%s" title="Click to open this file" class="file_link">%s</a>', $link, $text);
+            return sprintf('<a href="%s" title="Click to open this file" class="file_link">%s</a>', htmlspecialchars($link, ENT_QUOTES | ENT_SUBSTITUTE, $this->charset), $text);
         }
 
         return $text;
@@ -200,7 +207,7 @@ class CodeHelper extends Helper
     {
         $that = $this;
 
-        return preg_replace_callback('/in (")?(.*?)\1(?: +(?:on|at))? +line (\d+)/', function ($match) use ($that) {
+        return preg_replace_callback('/in ("|&quot;)?(.+?)\1(?: +(?:on|at))? +line (\d+)/s', function ($match) use ($that) {
             return 'in '.$that->formatFile($match[2], $match[3]);
         }, $text);
     }

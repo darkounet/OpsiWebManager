@@ -93,6 +93,7 @@ class ValidatorFactory implements ValidatorContextInterface
      * @param  string $staticMethod         The name of the static method to
      *                                      use, if static method loading should
      *                                      be enabled
+     *
      * @throws MappingException             If any of the files in $mappingFiles
      *                                      has neither the extension ".xml" nor
      *                                      ".yml" nor ".yaml"
@@ -109,7 +110,7 @@ class ValidatorFactory implements ValidatorContextInterface
 
             if ($extension === 'xml') {
                 $xmlMappingFiles[] = $file;
-            } else if ($extension === 'yaml' || $extension === 'yml') {
+            } elseif ($extension === 'yaml' || $extension === 'yml') {
                 $yamlMappingFiles[] = $file;
             } else {
                 throw new MappingException('The only supported mapping file formats are XML and YAML');
@@ -134,7 +135,7 @@ class ValidatorFactory implements ValidatorContextInterface
 
         if (count($loaders) > 1) {
             $loader = new LoaderChain($loaders);
-        } else if (count($loaders) === 1) {
+        } elseif (count($loaders) === 1) {
             $loader = $loaders[0];
         } else {
             throw new MappingException('No mapping loader was found for the given parameters');
@@ -161,6 +162,7 @@ class ValidatorFactory implements ValidatorContextInterface
      * the new context
      *
      * @param  ClassMetadataFactoryInterface $metadataFactory  The new factory instance
+     *
      * @return ValidatorContextInterface                       The preconfigured form context
      */
     public function setClassMetadataFactory(ClassMetadataFactoryInterface $metadataFactory)
@@ -175,6 +177,7 @@ class ValidatorFactory implements ValidatorContextInterface
      * returns the new context
      *
      * @param  ClassMetadataFactoryInterface $validatorFactory  The new factory instance
+     *
      * @return ValidatorContextInterface                        The preconfigured form context
      */
     public function setConstraintValidatorFactory(ConstraintValidatorFactoryInterface $validatorFactory)

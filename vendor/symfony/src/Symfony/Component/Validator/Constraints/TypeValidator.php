@@ -40,12 +40,12 @@ class TypeValidator extends ConstraintValidator
 
         if (function_exists($function) && call_user_func($function, $value)) {
             return true;
-        } else if ($value instanceof $constraint->type) {
+        } elseif ($value instanceof $constraint->type) {
             return true;
         }
 
         $this->setMessage($constraint->message, array(
-            '{{ value }}' => is_object($value) ? get_class($value) : (string)$value,
+            '{{ value }}' => is_object($value) ? get_class($value) : is_array($value) ? 'Array' : (string) $value,
             '{{ type }}'  => $constraint->type,
         ));
 

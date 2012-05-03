@@ -503,7 +503,8 @@ class HttpCache implements HttpKernelInterface
             // wait for the lock to be released
             $wait = 0;
             while (file_exists($lock) && $wait < 5000000) {
-                usleep($wait += 50000);
+                usleep(50000);
+                $wait += 50000;
             }
 
             if ($wait < 2000000) {
@@ -585,6 +586,9 @@ class HttpCache implements HttpKernelInterface
 
             $response->setContent(ob_get_clean());
             $response->headers->remove('X-Body-Eval');
+            if (!$response->headers->has('Transfer-Encoding')) {
+                $response->headers->set('Content-Length', strlen($response->getContent()));
+            }
         } elseif ($response->headers->has('X-Body-File')) {
             $response->setContent(file_get_contents($response->headers->get('X-Body-File')));
         } else {

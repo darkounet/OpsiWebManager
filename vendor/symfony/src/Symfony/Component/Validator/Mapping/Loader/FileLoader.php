@@ -58,8 +58,8 @@ abstract class FileLoader implements LoaderInterface
     {
         if (strpos($name, '\\') !== false && class_exists($name)) {
             $className = (string) $name;
-        } else if (strpos($name, ':') !== false) {
-            list($prefix, $className) = explode(':', $name);
+        } elseif (strpos($name, ':') !== false) {
+            list($prefix, $className) = explode(':', $name, 2);
 
             if (!isset($this->namespaces[$prefix])) {
                 throw new MappingException(sprintf('Undefined namespace prefix "%s"', $prefix));

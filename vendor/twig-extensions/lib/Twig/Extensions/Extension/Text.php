@@ -21,11 +21,16 @@ class Twig_Extensions_Extension_Text extends Twig_Extension
      */
     public function getFilters()
     {
-        return array(
+        $filters = array(
             'truncate' => new Twig_Filter_Function('twig_truncate_filter', array('needs_environment' => true)),
             'wordwrap' => new Twig_Filter_Function('twig_wordwrap_filter', array('needs_environment' => true)),
-            'nl2br'    => new Twig_Filter_Function('twig_nl2br_filter', array('pre_escape' => 'html', 'is_safe' => array('html'))),
         );
+
+        if (version_compare(Twig_Environment::VERSION, '1.5.0-DEV', '<')) {
+            $filters['nl2br'] = new Twig_Filter_Function('twig_nl2br_filter', array('pre_escape' => 'html', 'is_safe' => array('html')));
+        }
+
+        return $filters;
     }
 
     /**
@@ -82,23 +87,23 @@ if (function_exists('mb_get_info')) {
         return implode($separator, $sentences);
     }
 } else {
-  function twig_truncate_filter(Twig_Environment $env, $value, $length = 30, $preserve = false, $separator = '...')
-  {
-      if (strlen($value) > $length) {
-          if ($preserve) {
-              if (false !== ($breakpoint = strpos($value, ' ', $length))) {
-                  $length = $breakpoint;
-              }
-          }
+    function twig_truncate_filter(Twig_Environment $env, $value, $length = 30, $preserve = false, $separator = '...')
+    {
+        if (strlen($value) > $length) {
+            if ($preserve) {
+                if (false !== ($breakpoint = strpos($value, ' ', $length))) {
+                    $length = $breakpoint;
+                }
+            }
 
-          return substr($value, 0, $length) . $separator;
-      }
+            return substr($value, 0, $length) . $separator;
+        }
 
-      return $value;
-  }
+        return $value;
+    }
 
-  function twig_wordwrap_filter(Twig_Environment $env, $value, $length = 80, $separator = "\n", $preserve = false)
-  {
-      return wordwrap($value, $length, $separator, !$preserve);
-  }
+    function twig_wordwrap_filter(Twig_Environment $env, $value, $length = 80, $separator = "\n", $preserve = false)
+    {
+        return wordwrap($value, $length, $separator, !$preserve);
+    }
 }

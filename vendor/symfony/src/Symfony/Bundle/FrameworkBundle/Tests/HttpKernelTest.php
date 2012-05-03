@@ -166,4 +166,57 @@ class HttpKernelTest extends \PHPUnit_Framework_TestCase
             array(HttpKernelInterface::SUB_REQUEST),
         );
     }
+
+    public function testExceptionInSubRequestsDoesNotMangleOutputBuffers()
+    {
+        if (version_compare(phpversion(), '5.3.3', '<')) {
+            $this->markTestSkipped('Test fails with PHP 5.3.2 due to https://bugs.php.net/bug.php?id=50563');
+        }
+
+        $request = new Request();
+
+        $container = $this->getMock('Symfony\\Component\\DependencyInjection\\ContainerInterface');
+        $container
+            ->expects($this->at(0))
+            ->method('getParameter')
+            ->with($this->equalTo('kernel.debug'))
+            ->will($this->returnValue(false))
+        ;
+        $container
+            ->expects($this->at(1))
+            ->method('has')
+            ->with($this->equalTo('esi'))
+            ->will($this->returnValue(false))
+        ;
+        $container
+            ->expects($this->at(2))
+            ->method('get')
+            ->with($this->equalTo('request'))
+            ->will($this->returnValue($request))
+        ;
+
+        $dispatcher = new EventDispatcher();
+        $resolver = $this->getMock('Symfony\\Component\\HttpKernel\\Controller\\ControllerResolverInterface');
+        $resolver->expects($this->once())
+            ->method('getController')
+            ->will($this->returnValue(function () {
+                ob_start();
+                echo 'bar';
+                throw new \RuntimeException();
+            }));
+        $resolver->expects($this->once())
+            ->method('getArguments')
+            ->will($this->returnValue(array()));
+
+        $kernel = new HttpKernel($dispatcher, $container, $resolver);
+
+        // simulate a main request with output buffering
+        ob_start();
+        echo 'Foo';
+
+        // simulate a sub-request with output buffering and an exception
+        $kernel->render('/');
+
+        $this->assertEquals('Foo', ob_get_clean());
+    }
 }

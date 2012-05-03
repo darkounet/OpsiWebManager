@@ -57,7 +57,7 @@ abstract class Kernel implements KernelInterface
     protected $startTime;
     protected $classes;
 
-    const VERSION = '2.0.5';
+    const VERSION = '2.0.12';
 
     /**
      * Constructor.
@@ -597,7 +597,7 @@ abstract class Kernel implements KernelInterface
     {
         $parameters = array();
         foreach ($_SERVER as $key => $value) {
-            if ('SYMFONY__' === substr($key, 0, 9)) {
+            if (0 === strpos($key, 'SYMFONY__')) {
                 $parameters[strtolower(str_replace('__', '.', substr($key, 9)))] = $value;
             }
         }

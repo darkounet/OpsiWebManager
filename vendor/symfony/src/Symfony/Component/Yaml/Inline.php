@@ -87,7 +87,17 @@ class Inline
             case ctype_digit($value):
                 return is_string($value) ? "'$value'" : (int) $value;
             case is_numeric($value):
-                return is_string($value) ? "'$value'" : (is_infinite($value) ? str_ireplace('INF', '.Inf', strval($value)) : $value);
+                $locale = setlocale(LC_NUMERIC, 0);
+                if (false !== $locale) {
+                    setlocale(LC_NUMERIC, 'C');
+                }
+                $repr = is_string($value) ? "'$value'" : (is_infinite($value) ? str_ireplace('INF', '.Inf', strval($value)) : strval($value));
+
+                if (false !== $locale) {
+                    setlocale(LC_NUMERIC, $locale);
+                }
+
+                return $repr;
             case Escaper::requiresDoubleQuoting($value):
                 return Escaper::escapeWithDoubleQuotes($value);
             case Escaper::requiresSingleQuoting($value):
@@ -161,7 +171,7 @@ class Inline
                 if (false !== $strpos = strpos($output, ' #')) {
                     $output = rtrim(substr($output, 0, $strpos));
                 }
-            } else if (preg_match('/^(.+?)('.implode('|', $delimiters).')/', substr($scalar, $i), $match)) {
+            } elseif (preg_match('/^(.+?)('.implode('|', $delimiters).')/', substr($scalar, $i), $match)) {
                 $output = $match[1];
                 $i += strlen($output);
             } else {
@@ -178,7 +188,7 @@ class Inline
      * Parses a quoted scalar to YAML.
      *
      * @param string  $scalar
-     * @param integer $i
+     * @param integer &$i
      *
      * @return string A YAML string
      *
@@ -208,7 +218,7 @@ class Inline
      * Parses a sequence to a YAML string.
      *
      * @param string  $sequence
-     * @param integer $i
+     * @param integer &$i
      *
      * @return string A YAML string
      *
@@ -264,7 +274,7 @@ class Inline
      * Parses a mapping to a YAML string.
      *
      * @param string  $mapping
-     * @param integer $i
+     * @param integer &$i
      *
      * @return string A YAML string
      *

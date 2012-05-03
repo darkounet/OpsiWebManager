@@ -189,6 +189,8 @@ public function <methodName>()
 
         if ( ! $this->_isNew) {
             $this->_parseTokensInEntityFile(file_get_contents($path));
+        } else {
+            $this->_staticReflection[$metadata->name] = array('properties' => array(), 'methods' => array());
         }
 
         if ($this->_backupExisting && file_exists($path)) {
@@ -783,7 +785,7 @@ public function <methodName>()
         }
 
         if (isset($joinColumn['onDelete'])) {
-            $joinColumnAnnot[] = 'onDelete=' . ($joinColumn['onDelete'] ? 'true' : 'false');
+            $joinColumnAnnot[] = 'onDelete="' . ($joinColumn['onDelete'] . '"');
         }
 
         if (isset($joinColumn['onUpdate'])) {
